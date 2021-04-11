@@ -11,14 +11,14 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "homepage": "https://github.com/niconiahi/chakra-paginator",
-  "name": "chakra-paginator",
+  "homepage": "https://github.com/niconiahi/vishuda",
+  "name": "@vishuda/pagination",
   "keywords": [
     "chakra-ui",
     "react",
     "paginator",
     "pagination",
-    "chakra-paginator"
+    "vishuda"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
