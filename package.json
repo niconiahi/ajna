@@ -1,0 +1,14 @@
+{
+  "name": "vishuda",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "scripts": {
+    "test": "lerna run test",
+    "version": "lerna version --conventional-commits --yes"
+  }
+}

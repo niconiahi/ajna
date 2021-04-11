@@ -1,0 +1,105 @@
+{
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "rollup --config rollup.config.js",
+    "prebuild": "rm -rf dist",
+    "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx",
+    "lint:fix": "yarn lint --fix",
+    "upload": "yarn build && np",
+    "preview": "np preview",
+    "type-check": "tsc"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "homepage": "https://github.com/niconiahi/chakra-paginator",
+  "name": "chakra-paginator",
+  "keywords": [
+    "chakra-ui",
+    "react",
+    "paginator",
+    "pagination",
+    "chakra-paginator"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:niconiahi/chakra-paginator.git"
+  },
+  "version": "0.5.3",
+  "author": {
+    "name": "Nicolas Accetta",
+    "email": "nicolas.accetta@gmail.com",
+    "url": "https://github.com/niconiahi/"
+  },
+  "dependencies": {
+    "lodash.union": "^4.6.0"
+  },
+  "peerDependencies": {
+    "@chakra-ui/react": "^1.1.2",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "framer-motion": "^3.1.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3"
+  },
+  "devDependencies": {
+    "@chakra-ui/react": "^1.1.2",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "@rollup/plugin-babel": "^5.2.1",
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@types/lodash.union": "^4.6.6",
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
+    "framer-motion": "^3.1.4",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.3.0",
+    "prettier": "^2.1.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-icons": "^4.1.0",
+    "react-scripts": "3.4.3",
+    "rollup": "^2.27.1",
+    "rollup-plugin-peer-deps-external": "^2.2.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.27.3",
+    "typescript": "~4.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": [
+        "yarn type-check && lint-staged"
+      ]
+    }
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "yarn lint:fix"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
