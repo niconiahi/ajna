@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { ButtonProps, Input, Button, Flex, ChakraProvider } from "@chakra-ui/react";
-import { Paginator, Previous, Next, PageGroup, Container } from "@vishuda/pagination";
+import { Pagination, Previous, Next, PageGroup, Container } from "@vishuda/pagination";
 
 const App: FC = () => {
   // react hooks
@@ -48,7 +48,7 @@ const App: FC = () => {
 
   return (
     <ChakraProvider>
-      <Paginator
+      <Pagination
         currentPage={currentPage}
         isDisabled={isPaginatorDisabled}
         activeStyles={activeStyles}
@@ -77,7 +77,7 @@ const App: FC = () => {
             {/* Or an icon from `react-icons` */}
           </Next>
         </Container>
-      </Paginator>
+      </Pagination
       <Flex w="full" justify="center" align="center">
         <Input value={currentPage} onChange={handleCurrentPageChange} />
         <Button ml={4} onClick={handleDisableClick}>

@@ -21,7 +21,7 @@ export type PaginatorProps = {
   isDisabled?: boolean;
 };
 
-export const Paginator: FC<PaginatorProps> = ({
+export const Pagination: FC<PaginatorProps> = ({
   children,
   pagesQuantity = INITIAL_VALUES.pagesQuantity,
   normalStyles = INITIAL_VALUES.normalStyles,

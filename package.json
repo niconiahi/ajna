@@ -9,6 +9,9 @@
   },
   "scripts": {
     "test": "lerna run test",
+    "watch-build": "lerna run watch-build --scope=@vishuda/pagination",
+    "watch-types": "lerna run watch-types --scope=@vishuda/pagination",
+    "dev": "lerna run start --scope=@vishuda/demo",
     "version": "lerna version --conventional-commits --yes"
   }
 }
