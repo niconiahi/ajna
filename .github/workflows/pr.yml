@@ -4,9 +4,15 @@ on: [pull_request]
 
 jobs:
   setup:
+    runs-on: ubuntu-latest
     steps: 
       - name: clone repository
         uses: actions/checkout@v2
+
+      - name: setup node
+        uses: actions/setup-node@master
+        with: 
+          node-version: 12.x
 
       - name: restore lerna 
         uses: actions/cache@v2
