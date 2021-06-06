@@ -45,7 +45,7 @@ export const Page: FC<PageProps & ButtonProps> = ({ page, ...buttonProps }) => {
       cursor: "pointer",
       onClick: () => changePage(page),
     }),
-    [isDisabled]
+    [changePage, isDisabled, page]
   );
 
   if (isLeftSeparator)
