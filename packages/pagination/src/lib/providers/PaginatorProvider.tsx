@@ -35,7 +35,7 @@ export type PaginatorContextValues = {
   };
 };
 
-export const PaginatorContext = createContext<PaginatorContextValues>({
+export const PaginationContext = createContext<PaginatorContextValues>({
   state: {
     currentPage: INITIAL_VALUES.currentPage,
     activeStyles: INITIAL_VALUES.activeStyles,
@@ -56,7 +56,7 @@ export const PaginatorContext = createContext<PaginatorContextValues>({
   },
 });
 
-type PaginatorProviderProps = {
+type PaginationProviderProps = {
   pagesQuantity: number;
   normalStyles: ButtonProps;
   activeStyles: ButtonProps;
@@ -71,7 +71,7 @@ type PaginatorProviderProps = {
   isDisabled: boolean;
 };
 
-export const PaginatorProvider: FC<PaginatorProviderProps> = ({
+export const PaginatorProvider: FC<PaginationProviderProps> = ({
   children,
   pagesQuantity: pagesQuantityProp,
   currentPage: currentPageProp,
@@ -170,8 +170,8 @@ export const PaginatorProvider: FC<PaginatorProviderProps> = ({
   };
 
   return (
-    <PaginatorContext.Provider value={{ state, actions }}>
+    <PaginationContext.Provider value={{ state, actions }}>
       {children}
-    </PaginatorContext.Provider>
+    </PaginationContext.Provider>
   );
 };

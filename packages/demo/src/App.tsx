@@ -77,7 +77,7 @@ const App: FC = () => {
             {/* Or an icon from `react-icons` */}
           </Next>
         </Container>
-      </Pagination
+      </Pagination>
       <Flex w="full" justify="center" align="center">
         <Input value={currentPage} onChange={handleCurrentPageChange} />
         <Button ml={4} onClick={handleDisableClick}>
