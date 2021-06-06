@@ -23,6 +23,7 @@
     "dev": "lerna run start --scope=@vishuda/demo",
     "version": "lerna version --conventional-commits --yes",
     "lint": "lerna run lint --stream",
+    "bootstrap": "lerna bootstrap --use-workspaces",
     "build": "lerna run build --stream"
   }
 }
