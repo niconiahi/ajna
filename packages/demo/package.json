@@ -6,7 +6,7 @@
     "@vishuda/pagination": "0.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3"
+    "react-scripts": "^4.0.3"
   },
   "devDependencies": {
     "typescript": "^4.2.4",
@@ -16,7 +16,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "clean": "rm -rf node_modules yarn.lock",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
