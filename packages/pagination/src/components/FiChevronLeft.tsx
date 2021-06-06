@@ -7,7 +7,7 @@ const FiChevronLeft: IconType = ({ ...svgProps }) => (
   <svg
     className="feather feather-chevron-left"
     fill="none"
-    height="150"
+    height="24"
     stroke="currentColor"
     strokeLinecap="round"
     strokeLinejoin="round"

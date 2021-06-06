@@ -2,11 +2,11 @@ import React, { useContext, FC } from "react";
 import { Button, ButtonProps } from "@chakra-ui/react";
 
 // lib
-import { PaginatorContext } from "../lib/providers/PaginatorProvider";
+import { PaginationContext } from "../lib/providers/PaginationProvider";
 
 export const Previous: FC<ButtonProps> = ({ children, ...buttonProps }) => {
   // react hooks
-  const { actions, state } = useContext(PaginatorContext);
+  const { actions, state } = useContext(PaginationContext);
 
   // constants
   const { changePage } = actions;

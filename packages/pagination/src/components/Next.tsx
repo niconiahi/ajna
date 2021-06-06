@@ -2,16 +2,16 @@ import React, { FC, useContext } from "react";
 import { Button, ButtonProps } from "@chakra-ui/react";
 
 // lib
-import { PaginatorContext } from "../lib/providers/PaginatorProvider";
+import { PaginationContext } from "../lib/providers/PaginationProvider";
 
 export const Next: FC<ButtonProps> = ({ children, ...buttonProps }) => {
   // react hooks
-  const { actions, state } = useContext(PaginatorContext);
+  const { actions, state } = useContext(PaginationContext);
 
   // constants
   const { changePage } = actions;
   const { currentPage, pagesQuantity, isDisabled } = state;
-  const isLast = currentPage > pagesQuantity - 1;
+  const isLast = pagesQuantity ? currentPage > pagesQuantity - 1 : true;
 
   // handlers
   const handleNextClick = () => {

@@ -14,10 +14,10 @@ import { IconType } from "../types";
 import { INITIAL_VALUES } from "../constants";
 import { isDecimalNumber } from "../helpers";
 
-export type PaginatorContextValues = {
+export type PaginationContextValues = {
   state: {
     currentPage: number;
-    pagesQuantity: number;
+    pagesQuantity?: number;
     outerLimit: number;
     activeStyles: ButtonProps;
     hoverIconRight?: IconType;
@@ -35,7 +35,7 @@ export type PaginatorContextValues = {
   };
 };
 
-export const PaginationContext = createContext<PaginatorContextValues>({
+export const PaginationContext = createContext<PaginationContextValues>({
   state: {
     currentPage: INITIAL_VALUES.currentPage,
     activeStyles: INITIAL_VALUES.activeStyles,
@@ -57,7 +57,7 @@ export const PaginationContext = createContext<PaginatorContextValues>({
 });
 
 type PaginationProviderProps = {
-  pagesQuantity: number;
+  pagesQuantity?: number;
   normalStyles: ButtonProps;
   activeStyles: ButtonProps;
   hoverIconRight?: IconType;
@@ -71,7 +71,7 @@ type PaginationProviderProps = {
   isDisabled: boolean;
 };
 
-export const PaginatorProvider: FC<PaginationProviderProps> = ({
+export const PaginationProvider: FC<PaginationProviderProps> = ({
   children,
   pagesQuantity: pagesQuantityProp,
   currentPage: currentPageProp,
@@ -116,15 +116,19 @@ export const PaginatorProvider: FC<PaginationProviderProps> = ({
   useEffect(() => {
     if (isDecimalNumber(currentPageProp)) {
       console.error(
-        `Chakra paginator -> passed down currentPage has to be a whole number`
+        `Vishuda Pagination -> passed down currentPage has to be a whole number`
       );
 
       return;
     }
 
+    if (!pagesQuantity) {
+      return;
+    }
+
     if (currentPageProp > pagesQuantity) {
       console.error(
-        `Chakra paginator -> passed down currentPage can't be higher than pagesQuantity`
+        `Vishuda Pagination -> passed down currentPage can't be higher than pagesQuantity`
       );
 
       return;
@@ -132,7 +136,7 @@ export const PaginatorProvider: FC<PaginationProviderProps> = ({
 
     if (currentPageProp < 1) {
       console.error(
-        `Chakra paginator -> passed down currentPage can't be lower than 1`
+        `Vishuda Pagination -> passed down currentPage can't be lower than 1`
       );
 
       return;
@@ -141,7 +145,7 @@ export const PaginatorProvider: FC<PaginationProviderProps> = ({
     if (currentPageProp && currentPageProp !== currentPage) {
       setCurrentPage(currentPageProp);
     }
-  }, [currentPageProp]);
+  }, [currentPage, currentPageProp, pagesQuantity]);
 
   // handlers
   const changePage = (page: number) => {

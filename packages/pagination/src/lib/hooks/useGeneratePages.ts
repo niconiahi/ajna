@@ -2,7 +2,7 @@ import { useContext, useMemo } from "react";
 import { generatePages } from "../helpers";
 
 // lib
-import { PaginatorContext } from "../providers/PaginatorProvider";
+import { PaginationContext } from "../providers/PaginationProvider";
 
 type Values = {
   pages: number[];
@@ -10,7 +10,7 @@ type Values = {
 
 export const useGeneratePages = (): Values => {
   // react hooks
-  const { state } = useContext(PaginatorContext);
+  const { state } = useContext(PaginationContext);
 
   // constants
   const { currentPage, innerLimit, outerLimit, pagesQuantity } = state;

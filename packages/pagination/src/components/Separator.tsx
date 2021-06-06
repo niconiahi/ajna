@@ -6,7 +6,7 @@ import FiMoreHorizontal from "./FiMoreHorizontal";
 
 // lib
 import { IconType } from "../lib/types";
-import { PaginatorContext } from "../lib/providers/PaginatorProvider";
+import { PaginationContext } from "../lib/providers/PaginationProvider";
 
 type SeparatorProps = {
   separatorIcon?: IconType;
@@ -24,7 +24,7 @@ export const Separator: FC<SeparatorProps> = ({
   separatorPosition,
 }) => {
   // react hooks
-  const { actions, state } = useContext(PaginatorContext);
+  const { actions, state } = useContext(PaginationContext);
   const { innerLimit, currentPage } = state;
   const { setCurrentPage } = actions;
 

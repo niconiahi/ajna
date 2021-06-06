@@ -3,7 +3,7 @@ import { Button, Flex, ButtonProps } from "@chakra-ui/react";
 
 // lib
 import { SEPARATORS } from "../lib/constants";
-import { PaginatorContext } from "../lib/providers/PaginatorProvider";
+import { PaginationContext } from "../lib/providers/PaginationProvider";
 
 // components
 import FiChevronLeft from "./FiChevronLeft";
@@ -16,7 +16,7 @@ export type PageProps = {
 
 export const Page: FC<PageProps & ButtonProps> = ({ page, ...buttonProps }) => {
   // react hooks
-  const { actions, state } = useContext(PaginatorContext);
+  const { actions, state } = useContext(PaginationContext);
 
   // constants
   const { changePage } = actions;

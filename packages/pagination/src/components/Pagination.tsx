@@ -2,12 +2,12 @@ import React, { FC } from "react";
 import { ButtonProps } from "@chakra-ui/react";
 
 // lib
-import { PaginatorProvider } from "../lib/providers/PaginatorProvider";
+import { PaginationProvider } from "../lib/providers/PaginationProvider";
 import { IconType } from "../lib/types";
 import { INITIAL_VALUES } from "../lib/constants";
 
-export type PaginatorProps = {
-  pagesQuantity: number;
+export type PaginationProps = {
+  pagesQuantity?: number;
   onPageChange: (page: number) => void;
   normalStyles?: ButtonProps;
   activeStyles?: ButtonProps;
@@ -21,7 +21,7 @@ export type PaginatorProps = {
   isDisabled?: boolean;
 };
 
-export const Pagination: FC<PaginatorProps> = ({
+export const Pagination: FC<PaginationProps> = ({
   children,
   pagesQuantity = INITIAL_VALUES.pagesQuantity,
   normalStyles = INITIAL_VALUES.normalStyles,
@@ -36,7 +36,7 @@ export const Pagination: FC<PaginatorProps> = ({
   currentPage = INITIAL_VALUES.currentPage,
   onPageChange,
 }) => (
-  <PaginatorProvider
+  <PaginationProvider
     activeStyles={activeStyles}
     currentPage={currentPage}
     hoverIconLeft={hoverIconLeft}
@@ -51,5 +51,5 @@ export const Pagination: FC<PaginatorProps> = ({
     separatorStyles={separatorStyles}
   >
     {children}
-  </PaginatorProvider>
+  </PaginationProvider>
 );
