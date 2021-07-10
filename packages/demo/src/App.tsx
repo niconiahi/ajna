@@ -1,42 +1,44 @@
-import React, { FC, ChangeEvent, useEffect, useState } from "react";
+import React, { FC, ChangeEvent, useEffect, useState } from 'react'
 import {
   Grid,
   Center,
   Select,
-  ButtonProps,
   Text,
   Button,
   ChakraProvider
-} from "@chakra-ui/react";
+} from '@chakra-ui/react'
 import {
   Pagination,
   Container,
+  Separator,
   Previous,
+  Page,
   usePagination,
   Next,
   PageGroup
-} from "@vishuda/pagination"
+} from '@vishuda/pagination'
 
-const fetchPokemons = (pageSize: number, offset: number) => {
-  return fetch(
+const fetchPokemons = async (pageSize: number, offset: number): Promise<any> => {
+  return await fetch(
     `https://pokeapi.co/api/v2/pokemon?limit=${pageSize}&offset=${offset}`
-  ).then((res) => res.json());
-};
+  ).then(async (res) => await res.json())
+}
 
 const Demo: FC = () => {
   // states
   const [pokemonsTotal, setPokemonsTotal] = useState<number | undefined>(
     undefined
-  );
-  const [pokemons, setPokemons] = useState<any[]>([]);
+  )
+  const [pokemons, setPokemons] = useState<any[]>([])
 
   // constants
-  const outerLimit = 2;
-  const innerLimit = 2;
+  const outerLimit = 2
+  const innerLimit = 2
 
   const {
-    pagesQuantity,
-    offset, 
+    pages,
+    pagesCount,
+    offset,
     currentPage,
     setCurrentPage,
     setIsDisabled,
@@ -45,113 +47,105 @@ const Demo: FC = () => {
     setPageSize
   } = usePagination({
     total: pokemonsTotal,
+    limits: {
+      outer: outerLimit,
+      inner: innerLimit
+    },
     initialState: {
       pageSize: 5,
       isDisabled: false,
       currentPage: 1
     }
-  });
-
+  })
   // effects
   useEffect(() => {
     fetchPokemons(pageSize, offset).then((pokemons) => {
-      setPokemonsTotal(pokemons.count);
-      setPokemons(pokemons.results);
-    });
-  }, [currentPage, pageSize, offset]);
-
-  // styles
-  const baseStyles: ButtonProps = {
-    w: 7,
-    fontSize: "sm"
-  };
-
-  const normalStyles: ButtonProps = {
-    ...baseStyles,
-    _hover: {
-      bg: "green.300"
-    },
-    bg: "red.300"
-  };
-
-  const activeStyles: ButtonProps = {
-    ...baseStyles,
-    _hover: {
-      bg: "blue.300"
-    },
-    bg: "green.300"
-  };
-
-  const separatorStyles: ButtonProps = {
-    w: 7,
-    bg: "green.200"
-  };
+      setPokemonsTotal(pokemons.count)
+      setPokemons(pokemons.results)
+    }).catch((error) => console.error('App =>', error))
+  }, [currentPage, pageSize, offset])
 
   // handlers
-  const handlePageChange = (nextPage: number) => {
+  const handlePageChange = (nextPage: number): void => {
     // -> request new data using the page number
-    setCurrentPage(nextPage);
-    console.log("request new data with ->", nextPage);
-  };
+    setCurrentPage(nextPage)
+    console.log('request new data with ->', nextPage)
+  }
 
-  const handlePageSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const pageSize = Number(event.target.value);
+  const handlePageSizeChange = (
+    event: ChangeEvent<HTMLSelectElement>
+  ): void => {
+    const pageSize = Number(event.target.value)
 
-    setPageSize(pageSize);
-  };
+    setPageSize(pageSize)
+  }
 
-  const handleDisableClick = () => {
-    return setIsDisabled((oldState) => !oldState);
-  };
+  const handleDisableClick = (): void => {
+    setIsDisabled((oldState) => !oldState)
+  }
 
   return (
     <ChakraProvider>
       <Pagination
-        isDisabled={isDisabled}
-        activeStyles={activeStyles}
-        innerLimit={innerLimit}
+        pagesCount={pagesCount}
         currentPage={currentPage}
-        outerLimit={outerLimit}
-        normalStyles={normalStyles}
-        separatorStyles={separatorStyles}
-        pagesQuantity={pagesQuantity}
+        isDisabled={isDisabled}
         onPageChange={handlePageChange}
       >
-        <Container align="center" justify="space-between" w="full" p={4}>
+        <Container align='center' justify='space-between' p={4} w='full'>
           <Previous>
-            Previous
-            {/* Or an icon from `react-icons` */}
+            <Text>Previous</Text>
           </Previous>
-          <PageGroup isInline align="center" />
+          <PageGroup isInline align='center' separator={<Separator bg='red.300' fontSize='sm' w={7} />}>
+            {pages.map((page: number) => (
+              <Page
+                key={`pagination_page_${page}`}
+                _hover={{
+                  bg: 'green.300'
+                }}
+                _current={{
+                  _hover: {
+                    bg: 'blue.300'
+                  },
+                  bg: 'green.300',
+                  fontSize: 'sm',
+                  w: 7
+                }}
+                bg='red.300'
+                fontSize='sm'
+                page={page}
+                w={7}
+              />
+            ))}
+          </PageGroup>
           <Next>
-            Next
-            {/* Or an icon from `react-icons` */}
+            <Text>Next</Text>
           </Next>
         </Container>
       </Pagination>
-      <Center w="full">
+      <Center w='full'>
         <Button onClick={handleDisableClick}>Disable ON / OFF</Button>
-        <Select w={40} ml={3} onChange={handlePageSizeChange}>
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
+        <Select ml={3} onChange={handlePageSizeChange} w={40}>
+          <option value='10'>10</option>
+          <option value='25'>25</option>
+          <option value='50'>50</option>
         </Select>
       </Center>
       <Grid
-        templateRows="repeat(2, 1fr)"
-        templateColumns="repeat(5, 1fr)"
         gap={3}
-        px={20}
         mt={20}
+        px={20}
+        templateColumns='repeat(5, 1fr)'
+        templateRows='repeat(2, 1fr)'
       >
         {pokemons?.map(({ name }) => (
-          <Center p={4} bg="green.100" key={name}>
+          <Center key={name} bg='green.100' p={4}>
             <Text>{name}</Text>
           </Center>
         ))}
       </Grid>
     </ChakraProvider>
-  );
-};
+  )
+}
 
-export default Demo;
+export default Demo

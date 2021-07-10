@@ -1,33 +1,37 @@
-import React, { FC, useContext } from "react";
-import { Button, ButtonProps } from "@chakra-ui/react";
+import React, { FC, useContext } from 'react'
+import { Button, ButtonProps } from '@chakra-ui/react'
 
 // lib
-import { PaginationContext } from "../lib/providers/PaginationProvider";
+import { PaginationContext } from '../lib/providers/PaginationProvider'
 
-export const Next: FC<ButtonProps> = ({ children, ...buttonProps }) => {
-  // react hooks
-  const { actions, state } = useContext(PaginationContext);
+export const Next: FC<ButtonProps> = ({ children, isDisabled: isDisabledProp, ...buttonProps }) => {
+  // provider
+  const { actions, state } = useContext(PaginationContext)
+  const { changePage } = actions
+  const { currentPage, pagesCount, isDisabled: isDisabledGlobal } = state
 
   // constants
-  const { changePage } = actions;
-  const { currentPage, pagesQuantity, isDisabled } = state;
-  const isLast = pagesQuantity ? currentPage > pagesQuantity - 1 : true;
+  const isDisabled = isDisabledProp ?? isDisabledGlobal
+  const isLast = currentPage > pagesCount - 1
 
   // handlers
-  const handleNextClick = () => {
-    if (!isLast) changePage(currentPage + 1);
-  };
+  const handleNextClick = (): void => {
+    if (!isLast) changePage(currentPage + 1)
+  }
+
+  // TODO: implement getNextProps
 
   return (
     <Button
-      aria-label="Next page"
+      aria-label='Next page'
+      className='pagination-next'
       isDisabled={isLast || isDisabled}
       onClick={handleNextClick}
-      pointerEvents={isDisabled ? "none" : "auto"}
-      {...(isLast || isDisabled ? { "aria-disabled": true } : {})}
+      pointerEvents={isDisabled ? 'none' : 'auto'}
+      {...(isLast || isDisabled ? { 'aria-disabled': true } : {})}
       {...buttonProps}
     >
       {children}
     </Button>
-  );
-};
+  )
+}

@@ -1,98 +1,106 @@
-import React, { FC, useCallback, useContext, useMemo } from "react";
-import { Button, Flex, ButtonProps, Icon } from "@chakra-ui/react";
+import React, { FC } from 'react'
+import { Button, Flex, ButtonProps, Icon } from '@chakra-ui/react'
 
 // components
-import FiMoreHorizontal from "./FiMoreHorizontal";
+import FiMoreHorizontal from './FiMoreHorizontal'
 
 // lib
-import { IconType } from "../lib/types";
-import { PaginationContext } from "../lib/providers/PaginationProvider";
+import { usePaginationContext } from '../lib/hooks/usePaginationContext'
+import { INITIAL_VALUES } from '../lib/constants'
+import { IconType } from '../lib/types'
 
-type SeparatorProps = {
-  separatorIcon?: IconType;
-  hoverIcon: IconType;
-  separatorStyles: ButtonProps;
-  separatorPosition: "left" | "right";
-  isDisabled: boolean;
-};
+interface SeparatorProps {
+  hoverIcon?: IconType
+  jumpSize?: number
+  isDisabled?: boolean
+  separatorPosition?: 'left' | 'right'
+}
 
-export const Separator: FC<SeparatorProps> = ({
+export const Separator: FC<SeparatorProps & ButtonProps> = ({
   hoverIcon,
-  isDisabled,
-  separatorIcon,
-  separatorStyles,
   separatorPosition,
+  isDisabled: isDisabledProp,
+  jumpSize = INITIAL_VALUES.jumpSize,
+  ...buttonProps
 }) => {
-  // react hooks
-  const { actions, state } = useContext(PaginationContext);
-  const { innerLimit, currentPage } = state;
-  const { setCurrentPage } = actions;
+  // provider
+  const { actions, state } = usePaginationContext()
+  const { currentPage, isDisabled: isDisabledGlobal } = state
+  const { changePage } = actions
 
-  const pageToJump = useMemo(() => {
-    if (separatorPosition === "left") return currentPage - innerLimit;
-    if (separatorPosition === "right") return currentPage + innerLimit;
-  }, [separatorPosition, innerLimit, currentPage]);
+  // memos
+  const getPageToJump = (): number => {
+    if (separatorPosition === 'left') return currentPage - jumpSize
+    if (separatorPosition === 'right') return currentPage + jumpSize
+
+    return 0
+  }
 
   // constants
-  const jumpingDirection =
-    separatorPosition === "left" ? "backwards" : "forward";
+  // TODO: add 'canJump' using 'pagesCount' to determine allowence to not going over the limit
+  const isDisabled = isDisabledProp ?? isDisabledGlobal
+  const jumpingDirectionLabel =
+    separatorPosition === 'left' ? 'backwards' : 'forward'
 
   // handlers
-  const handleJumpClick = useCallback(() => {
-    if (isDisabled) return;
+  const handleJumpClick = (): void => {
+    if (isDisabled) return
 
-    if (pageToJump) {
-      setCurrentPage(pageToJump);
-    }
-  }, [pageToJump, isDisabled, setCurrentPage]);
+    const pageToJump = getPageToJump()
+
+    changePage(pageToJump)
+  }
+
+  // TODO: implement getSeparatorProps
 
   return (
-    <Flex as="li">
+    <Flex as='li'>
       <Button
-        align="center"
-        aria-label={`Jump pages ${jumpingDirection}`}
-        bg="transparent"
-        cursor="pointer"
-        justify="center"
-        minW="auto"
-        onClick={handleJumpClick}
-        pointerEvents={isDisabled ? "none" : "auto"}
-        pos="relative"
+        align='center'
+        className='pagination-separator'
+        aria-label={`Jump pages ${jumpingDirectionLabel}`}
+        bg='transparent'
+        cursor='pointer'
+        justify='center'
+        minW='auto'
+        pointerEvents={isDisabled ? 'none' : 'auto'}
+        pos='relative'
         px={1}
+        onClick={handleJumpClick}
         sx={{
           _hover: {
-            ".call-to-action": {
-              opacity: 1,
-            },
-          },
+            '.call-to-action': {
+              opacity: 1
+            }
+          }
         }}
-        {...(isDisabled ? { "aria-disabled": true } : {})}
-        {...separatorStyles}
+        {...(isDisabled ? { 'aria-disabled': true } : {})}
+        {...buttonProps}
       >
         <Icon
-          as={separatorIcon ?? FiMoreHorizontal}
-          bg="inherit"
-          color="inherit"
+          as={FiMoreHorizontal}
+          bg='inherit'
+          color='inherit'
           h={4}
           w={4}
         />
         <Icon
           as={hoverIcon}
-          bg="inherit"
+          bg='inherit'
           bottom={0}
-          className="call-to-action"
-          color="inherit"
+          className='call-to-action'
+          color='inherit'
           h={4}
           left={0}
-          m="auto"
+          m='auto'
           opacity={0}
-          pos="absolute"
+          pos='absolute'
           right={0}
           top={0}
-          transition="all  cubic-bezier(0.4, 1, 0.9, 0.6) 0.3s"
+          transition='all  cubic-bezier(0.4, 1, 0.9, 0.6) 0.3s'
           w={4}
         />
       </Button>
     </Flex>
-  );
-};
+  )
+}

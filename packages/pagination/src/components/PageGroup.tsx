@@ -1,23 +1,21 @@
-import React, { FC } from "react";
-import { Stack, StackProps } from "@chakra-ui/react";
+import React, { FC, ReactElement, cloneElement, Children } from 'react'
+import { Stack, StackProps } from '@chakra-ui/react'
 
-// lib
-import { useGeneratePages } from "../lib/hooks/useGeneratePages";
+interface Props {
+  separator?: ReactElement
+}
 
-// components
-import { Page } from "./Page";
-
-type PageGroupProps = StackProps;
-
-export const PageGroup: FC<PageGroupProps> = ({ ...stackProps }) => {
-  // custom hooks
-  const { pages } = useGeneratePages();
+export const PageGroup: FC<Props & StackProps> = ({ children, separator, ...stackProps }) => {
+  // TODO: implement getPageGroupProp
 
   return (
-    <Stack isInline as="ol" spacing={1} {...stackProps}>
-      {pages.map((page, index) => (
-        <Page key={`paginator_page_${page}_${index}`} page={page} />
-      ))}
+    <Stack className='pagination-page-group' isInline as='ol' spacing={1} {...stackProps}>
+      {Children.map((children), (child) => {
+        if (child == null) return
+
+        // @ts-expect-error We know it's a Page component for now
+        return cloneElement(child, { separator })
+      })}
     </Stack>
-  );
-};
+  )
+}

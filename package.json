@@ -5,27 +5,22 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.22.0",
-    "@typescript-eslint/parser": "^4.22.0",
-    "eslint": "^7.24.0",
-    "eslint-config-prettier": "^8.2.0",
-    "eslint-config-react": "^1.1.7",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.23.2",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "lerna": "^4.0.0"
+    "concurrently": "^6.2.0",
+    "lerna": "^4.0.0",
+    "prettier": "^2.3.1",
+    "typescript": "^4.3.4"
   },
   "scripts": {
-    "test": "lerna run test",
-    "watch-build": "lerna run watch-build --ignore @vishuda/demo",
-    "watch-types": "lerna run watch-types --ignore @vishuda/demo",
+    "watch:build": "lerna run watch:build --scope=@vishuda/pagination",
+    "watch:types": "lerna run watch:types --scope=@vishuda/pagination",
+    "watch": "concurrently \"yarn watch:build\" \"yarn watch:types\"",
     "dev": "lerna run start --scope=@vishuda/demo",
     "version": "lerna version --conventional-commits --yes",
     "clean:b": "rm -rf node_modules yarn.lock",
     "clean": "lerna run clean && yarn clean:b",
     "lint": "lerna run lint --stream",
-    "bootstrap": "lerna bootstrap --use-workspaces",
+    "lint:fix": "lerna run lint:fix --stream",
+    "bootstrap": "yarn clean && lerna bootstrap",
     "build": "lerna run build --stream"
   }
 }

@@ -1,10 +1,12 @@
-import React, { FC } from "react";
-import { FlexProps, Flex } from "@chakra-ui/react";
+import React, { FC } from 'react'
+import { FlexProps, Flex } from '@chakra-ui/react'
 
-type ContainerProps = FlexProps;
+export const Container: FC<FlexProps> = ({ children, ...flexProps }) => {
+  // TODO: implement  getContainerProps
 
-export const Container: FC<ContainerProps> = ({ children, ...flexProps }) => (
-  <Flex aria-label="pagination navigation" as="nav" {...flexProps}>
-    {children}
-  </Flex>
-);
+  return (
+    <Flex className='pagination-container' aria-label='pagination navigation' as='nav' {...flexProps}>
+      {children}
+    </Flex>
+  )
+}
