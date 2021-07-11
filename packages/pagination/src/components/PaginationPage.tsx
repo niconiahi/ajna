@@ -8,7 +8,7 @@ import { usePaginationContext } from '../lib/hooks/usePaginationContext'
 // components
 import FiChevronLeft from './FiChevronLeft'
 import FiChevronRight from './FiChevronRight'
-import { Separator } from './Separator'
+import { PaginationSeparator } from './PaginationSeparator'
 
 export interface PageProps {
   page: number
@@ -22,7 +22,7 @@ const buttonStyles: ButtonProps = {
   cursor: 'pointer'
 }
 
-export const Page: FC<PageProps & ButtonProps> = ({ page, isDisabled: isDisabledProp, separator, _current = {}, ...buttonProps }) => {
+export const PaginationPage: FC<PageProps & ButtonProps> = ({ page, isDisabled: isDisabledProp, separator, _current = {}, ...buttonProps }) => {
   // provider
   const { actions, state } = usePaginationContext()
   const { changePage } = actions
@@ -64,7 +64,7 @@ export const Page: FC<PageProps & ButtonProps> = ({ page, isDisabled: isDisabled
 
   if (isLeftSeparator) {
     return (
-      <Separator
+      <PaginationSeparator
         hoverIcon={FiChevronLeft}
         isDisabled={isSeparatorDisabled}
         separatorPosition='left'
@@ -75,7 +75,7 @@ export const Page: FC<PageProps & ButtonProps> = ({ page, isDisabled: isDisabled
 
   if (isRightSeparator) {
     return (
-      <Separator
+      <PaginationSeparator
         hoverIcon={FiChevronRight}
         isDisabled={isSeparatorDisabled}
         separatorPosition='right'

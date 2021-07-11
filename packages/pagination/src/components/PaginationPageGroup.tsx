@@ -5,7 +5,7 @@ interface Props {
   separator?: ReactElement
 }
 
-export const PageGroup: FC<Props & StackProps> = ({ children, separator, ...stackProps }) => {
+export const PaginationPageGroup: FC<Props & StackProps> = ({ children, separator, ...stackProps }) => {
   // TODO: implement getPageGroupProp
 
   return (

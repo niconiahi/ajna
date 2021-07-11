@@ -4,7 +4,7 @@ import { Button, ButtonProps } from '@chakra-ui/react'
 // lib
 import { usePaginationContext } from '../lib/hooks/usePaginationContext'
 
-export const Previous: FC<ButtonProps> = ({ children, isDisabled: isDisabledProp, ...buttonProps }) => {
+export const PaginationPrevious: FC<ButtonProps> = ({ children, isDisabled: isDisabledProp, ...buttonProps }) => {
   // provider
   const { actions, state } = usePaginationContext()
   const { changePage } = actions

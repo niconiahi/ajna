@@ -51,7 +51,7 @@ const separatorTransitionStyles: IconProps = {
   transition: 'all  cubic-bezier(0.4, 1, 0.9, 0.6) 0.3s'
 }
 
-export const Separator: FC<SeparatorProps & ButtonProps> = ({
+export const PaginationSeparator: FC<SeparatorProps & ButtonProps> = ({
   hoverIcon,
   separatorPosition,
   isDisabled: isDisabledProp,
@@ -124,6 +124,7 @@ export const Separator: FC<SeparatorProps & ButtonProps> = ({
       >
         <Icon
           as={FiMoreHorizontal}
+          {...separatorIconStyles}
         />
         <Icon
           as={hoverIcon}
