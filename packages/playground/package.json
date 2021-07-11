@@ -1,6 +1,6 @@
 {
-  "name": "@vishuda/demo",
-  "version": "0.1.0",
+  "name": "@vishuda/playground",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@vishuda/pagination": "1.0.0",

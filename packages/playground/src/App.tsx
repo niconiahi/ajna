@@ -24,7 +24,7 @@ const fetchPokemons = async (pageSize: number, offset: number): Promise<any> => 
   ).then(async (res) => await res.json())
 }
 
-const Demo: FC = () => {
+const Playground: FC = () => {
   // states
   const [pokemonsTotal, setPokemonsTotal] = useState<number | undefined>(
     undefined
@@ -149,4 +149,4 @@ const Demo: FC = () => {
   )
 }
 
-export default Demo
+export default Playground 
