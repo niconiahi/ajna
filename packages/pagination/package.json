@@ -32,7 +32,9 @@
     "watch:build": "yarn build --watch"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "tag": "pagination"
   },
   "dependencies": {
     "lodash.union": "^4.6.0"
