@@ -1,18 +1,24 @@
 {
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "version": "1.0.0",
   "homepage": "https://github.com/niconiahi/vishuda",
   "name": "@vishuda/pagination",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "author": {
+    "name": "Nicolas Accetta",
+    "email": "nicolas.accetta@gmail.com",
+    "url": "https://github.com/niconiahi/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:niconiahi/vishuda.git"
+  },
   "keywords": [
     "chakra-ui",
     "react",
     "pagination",
     "vishuda"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:niconiahi/vishuda.git"
-  },
   "scripts": {
     "start": "react-scripts start",
     "clean": "rm -rf node_modules yarn.lock",
@@ -27,12 +33,6 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
-  },
-  "version": "1.0.0",
-  "author": {
-    "name": "Nicolas Accetta",
-    "email": "nicolas.accetta@gmail.com",
-    "url": "https://github.com/niconiahi/"
   },
   "dependencies": {
     "lodash.union": "^4.6.0"
@@ -82,21 +82,6 @@
   "lint-staged": {
     "**/*.{ts,tsx}": [
       "yarn lint:fix"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
   }
 }
