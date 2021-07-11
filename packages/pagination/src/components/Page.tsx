@@ -1,87 +1,97 @@
-import React, { useMemo, useContext, FC } from "react";
-import { Button, Flex, ButtonProps } from "@chakra-ui/react";
+import React, { FC, ReactElement, MouseEvent, useMemo } from 'react'
+import { Button, Flex, ButtonProps } from '@chakra-ui/react'
 
 // lib
-import { SEPARATORS } from "../lib/constants";
-import { PaginatorContext } from "../lib/providers/PaginatorProvider";
+import { SEPARATORS } from '../lib/constants'
+import { usePaginationContext } from '../lib/hooks/usePaginationContext'
 
 // components
-import FiChevronLeft from "./FiChevronLeft";
-import FiChevronRight from "./FiChevronRight";
-import { Separator } from "./Separator";
+import FiChevronLeft from './FiChevronLeft'
+import FiChevronRight from './FiChevronRight'
+import { Separator } from './Separator'
 
-export type PageProps = {
-  page: number;
-};
+export interface PageProps {
+  page: number
+  separator?: ReactElement<ButtonProps>
+  _current?: ButtonProps
+}
 
-export const Page: FC<PageProps & ButtonProps> = ({ page, ...buttonProps }) => {
-  // react hooks
-  const { actions, state } = useContext(PaginatorContext);
+const buttonStyles: ButtonProps = {
+  minW: 'auto',
+  px: 1,
+  cursor: 'pointer'
+}
 
-  // constants
-  const { changePage } = actions;
+export const Page: FC<PageProps & ButtonProps> = ({ page, isDisabled: isDisabledProp, separator, _current = {}, ...buttonProps }) => {
+  // provider
+  const { actions, state } = usePaginationContext()
+  const { changePage } = actions
   const {
     currentPage,
+    isDisabled: isDisabledGlobal
+  } = state
+
+  // methods
+  const getPageProps = ({ onClick, isDisabled: _isDisabled, ...props }: ButtonProps): ButtonProps => ({
+    ...props,
+    'aria-disabled': isDisabled,
+    'aria-current': isCurrent,
+    'aria-label': pageLabel,
     isDisabled,
-    activeStyles,
-    hoverIconLeft,
-    hoverIconRight,
-    separatorStyles,
-    normalStyles,
-    separatorIcon,
-  } = state;
-  const isCurrent = currentPage === page;
-  const isLeftSeparator = page === SEPARATORS.left;
-  const isRightSeparator = page === SEPARATORS.right;
-  const pageLabel = isCurrent
+    onClick: (event: MouseEvent<HTMLButtonElement>) => {
+      if (!isDisabled) {
+        onClick?.(event)
+      }
+      changePage(page)
+    }
+  })
+
+  // memos
+  const isCurrent = useMemo(() => currentPage === page, [currentPage, page])
+  const isDisabled = useMemo(() => isDisabledProp ?? isDisabledGlobal, [isDisabledGlobal, isDisabledProp])
+  const isSeparatorDisabled = useMemo(() => separator?.props?.isDisabled ?? isDisabledGlobal, [isDisabledGlobal, isDisabledProp])
+  const currentStyles = useMemo(() => isCurrent ? _current : {}, [isCurrent, _current])
+  const isLeftSeparator = useMemo(() => page === SEPARATORS.left, [page])
+  const isRightSeparator = useMemo(() => page === SEPARATORS.right, [page])
+  const pageLabel = useMemo(() => isCurrent
     ? `Current page, page ${page}`
-    : `Go to page ${page}`;
+    : `Go to page ${page}`, [isCurrent, page])
+  const allProps = useMemo(() => ({
+    ...buttonStyles,
+    ...buttonProps,
+    ...currentStyles
+  }), [buttonStyles, buttonProps, currentStyles])
 
-  const baseButtonProps: ButtonProps = useMemo(
-    () => ({
-      minW: "auto",
-      px: 1,
-      pointerEvents: isDisabled ? "none" : "auto",
-      cursor: "pointer",
-      onClick: () => changePage(page),
-    }),
-    [isDisabled]
-  );
-
-  if (isLeftSeparator)
+  if (isLeftSeparator) {
     return (
       <Separator
-        hoverIcon={hoverIconLeft ?? FiChevronLeft}
-        isDisabled={isDisabled}
-        separatorIcon={separatorIcon}
-        separatorPosition="left"
-        separatorStyles={separatorStyles}
+        hoverIcon={FiChevronLeft}
+        isDisabled={isSeparatorDisabled}
+        separatorPosition='left'
+        {...(separator?.props ?? {})}
       />
-    );
+    )
+  }
 
-  if (isRightSeparator)
+  if (isRightSeparator) {
     return (
       <Separator
-        hoverIcon={hoverIconRight ?? FiChevronRight}
-        isDisabled={isDisabled}
-        separatorIcon={separatorIcon}
-        separatorPosition="right"
-        separatorStyles={separatorStyles}
+        hoverIcon={FiChevronRight}
+        isDisabled={isSeparatorDisabled}
+        separatorPosition='right'
+        {...(separator?.props ?? {})}
       />
-    );
+    )
+  }
 
   return (
-    <Flex as="li">
+    <Flex as='li'>
       <Button
-        aria-label={pageLabel}
-        {...(isDisabled ? { "aria-disabled": true } : {})}
-        {...(isCurrent ? { "aria-current": true } : {})}
-        {...baseButtonProps}
-        {...buttonProps}
-        {...(isCurrent ? activeStyles : normalStyles)}
+        className='pagination-page'
+        {...getPageProps(allProps)}
       >
         {page}
       </Button>
     </Flex>
-  );
-};
+  )
+}

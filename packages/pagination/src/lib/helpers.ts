@@ -1,92 +1,98 @@
-import union from "lodash.union";
+import union from 'lodash.union'
 
 // lib
-import { SEPARATORS } from "../lib/constants";
+import { SEPARATORS } from '../lib/constants'
 
-type Arguments = {
-  pagesQuantity: number;
-  innerLimit: number;
-  outerLimit: number;
-  currentPage: number;
-};
+interface Arguments {
+  pagesCount?: number
+  innerLimit: number
+  outerLimit: number
+  currentPage: number
+}
 
-export const getFirstItem = <T>(array: T[]): T => array[0];
-export const getLastItem = <T>(array: T[]): T => array.slice(-1)[0];
+export const getFirstItem = <T>(array: T[]): T => array[0]
+export const getLastItem = <T>(array: T[]): T => array.slice(-1)[0]
 
 export const isDecimalNumber = (number: number): boolean => {
-  return number - Math.floor(number) !== 0;
-};
+  return number - Math.floor(number) !== 0
+}
 
 export const generatePages = ({
-  pagesQuantity,
+  pagesCount,
   currentPage,
   innerLimit,
-  outerLimit,
+  outerLimit
 }: Arguments): number[] => {
-  const allPages = [...Array(pagesQuantity).keys()].map((page) => page + 1);
+  if (pagesCount == null) {
+    return []
+  }
 
-  if (!innerLimit || !outerLimit) return allPages;
+  const allPages = [...Array(pagesCount).keys()].map((page) => page + 1)
 
-  const outerLeftPages = allPages.slice(0, outerLimit);
-  const outerRightPages = allPages.slice(1).slice(-outerLimit);
+  if (innerLimit == null || outerLimit == null) return allPages
 
-  const lastPageOfOuterLeftPages = getLastItem(outerLeftPages);
-  const firstPageOfOuterRightPages = getFirstItem(outerRightPages);
+  const outerLeftPages = allPages.slice(0, outerLimit)
+  const outerRightPages = allPages.slice(1).slice(-outerLimit)
 
-  const generateRightInnerPages = () => {
-    const rightInnerLastIndex = currentPage + innerLimit;
+  const lastPageOfOuterLeftPages = getLastItem(outerLeftPages)
+  const firstPageOfOuterRightPages = getFirstItem(outerRightPages)
+
+  const generateRightInnerPages = (): number[] => {
+    const rightInnerLastIndex = currentPage + innerLimit
     const isAfterFirstOuterRightPage =
-      rightInnerLastIndex > firstPageOfOuterRightPages;
+      rightInnerLastIndex > firstPageOfOuterRightPages
 
     return isAfterFirstOuterRightPage
       ? allPages.slice(currentPage + 1, firstPageOfOuterRightPages)
-      : allPages.slice(currentPage, rightInnerLastIndex);
-  };
+      : allPages.slice(currentPage, rightInnerLastIndex)
+  }
 
-  const generateLeftInnerPages = () => {
-    const leftInnerFirstIndex = currentPage - innerLimit;
+  const generateLeftInnerPages = (): number[] => {
+    const leftInnerFirstIndex = currentPage - innerLimit
     const isBeforeLastOuterLeftPage =
-      leftInnerFirstIndex < lastPageOfOuterLeftPages;
+      leftInnerFirstIndex < lastPageOfOuterLeftPages
 
     return isBeforeLastOuterLeftPage
       ? allPages.slice(lastPageOfOuterLeftPages, currentPage - 1)
-      : allPages.slice(leftInnerFirstIndex - 1, currentPage - 1);
-  };
+      : allPages.slice(leftInnerFirstIndex - 1, currentPage - 1)
+  }
 
-  const leftInnerPages = generateLeftInnerPages();
-  const leftPages = union([...outerLeftPages], [...leftInnerPages]);
+  const leftInnerPages = generateLeftInnerPages()
+  const leftPages = union([...outerLeftPages], [...leftInnerPages])
   const shouldHaveLeftSeparator =
-    getFirstItem(leftInnerPages) > lastPageOfOuterLeftPages + 1;
+    getFirstItem(leftInnerPages) > lastPageOfOuterLeftPages + 1
 
-  const rightInnerPages = generateRightInnerPages();
-  const rightPages = union([...rightInnerPages], [...outerRightPages]);
+  const rightInnerPages = generateRightInnerPages()
+  const rightPages = union([...rightInnerPages], [...outerRightPages])
   const shouldHaveRightSeparator =
-    getLastItem(rightInnerPages) < firstPageOfOuterRightPages - 1;
+    getLastItem(rightInnerPages) < firstPageOfOuterRightPages - 1
 
   const unduplicatedPages = union(
     [...leftPages],
     [currentPage],
     [...rightPages]
-  );
+  )
 
-  const addSeparators = (pages: number[]) =>
+  const addSeparators = (pages: number[]): number[] =>
     pages.reduce<number[]>((acc: number[], page: number) => {
-      const checkPageForSeparator = () => {
+      const checkPageForSeparator = (): number[] => {
         if (page === lastPageOfOuterLeftPages && shouldHaveLeftSeparator) {
-          return [lastPageOfOuterLeftPages, SEPARATORS.left];
+          return [lastPageOfOuterLeftPages, SEPARATORS.left]
         }
 
         if (page === firstPageOfOuterRightPages && shouldHaveRightSeparator) {
-          return [SEPARATORS.right, firstPageOfOuterRightPages];
+          return [SEPARATORS.right, firstPageOfOuterRightPages]
         }
 
-        return [page];
-      };
+        return [page]
+      }
 
-      return [...acc, ...checkPageForSeparator()];
-    }, []);
+      return [...acc, ...checkPageForSeparator()]
+    }, [])
 
-  const pages = addSeparators(unduplicatedPages);
+  const pages = addSeparators(unduplicatedPages)
 
-  return pages;
-};
+  return pages
+}
+
+export const callAll = (...fns: any) => (...args: any) => fns.forEach((fn: any) => fn?.(...args))

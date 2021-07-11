@@ -1,33 +1,44 @@
-import React, { useContext, FC } from "react";
-import { Button, ButtonProps } from "@chakra-ui/react";
+import React, { FC, MouseEvent, useMemo } from 'react'
+import { Button, ButtonProps } from '@chakra-ui/react'
 
 // lib
-import { PaginatorContext } from "../lib/providers/PaginatorProvider";
+import { usePaginationContext } from '../lib/hooks/usePaginationContext'
 
-export const Previous: FC<ButtonProps> = ({ children, ...buttonProps }) => {
-  // react hooks
-  const { actions, state } = useContext(PaginatorContext);
+export const Previous: FC<ButtonProps> = ({ children, isDisabled: isDisabledProp, ...buttonProps }) => {
+  // provider
+  const { actions, state } = usePaginationContext()
+  const { changePage } = actions
+  const { currentPage, isDisabled: isDisabledGlobal } = state
 
-  // constants
-  const { changePage } = actions;
-  const { currentPage, isDisabled } = state;
-  const isFirst = currentPage === 1;
+  // methods
+  const getPreviousProps = ({ onClick, isDisabled: _isDisabled, ...props }: ButtonProps): ButtonProps => ({
+    ...props,
+    'aria-label': 'Previous page',
+    'aria-disabled': isDisabled,
+    isDisabled,
+    onClick: (event: MouseEvent<HTMLButtonElement>) => {
+      if (!isDisabled) {
+        onClick?.(event)
+      }
+      handlePreviousClick()
+    }
+  })
+
+  // memos
+  const isFirst = useMemo(() => currentPage === 1, [currentPage])
+  const isDisabled = useMemo(() => isFirst || (isDisabledProp ?? isDisabledGlobal), [isFirst, isDisabledProp, isDisabledGlobal])
 
   // handlers
-  const handlePreviousClick = () => {
-    if (!isFirst) changePage(currentPage - 1);
-  };
+  const handlePreviousClick = (): void => {
+    if (!isFirst) changePage(currentPage - 1)
+  }
 
   return (
     <Button
-      aria-label="Previous page"
-      isDisabled={isFirst || isDisabled}
-      onClick={handlePreviousClick}
-      pointerEvents={isDisabled ? "none" : "auto"}
-      {...(isFirst || isDisabled ? { "aria-disabled": true } : {})}
-      {...buttonProps}
+      className='pagination-previous'
+      {...getPreviousProps(buttonProps)}
     >
       {children}
     </Button>
-  );
-};
+  )
+}

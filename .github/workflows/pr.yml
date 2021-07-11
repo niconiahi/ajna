@@ -1,0 +1,32 @@
+name: Create Pull Request
+
+on: [pull_request]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: clone repository
+        uses: actions/checkout@v2
+
+      - name: setup node
+        uses: actions/setup-node@master
+        with: 
+          node-version: 12.x
+
+      - name: restore lerna 
+        uses: actions/cache@v2
+        with: 
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: install dependencies
+        run: yarn install --frozen-lockfile && yarn bootstrap
+
+      - name: build packages
+        run: yarn build
+
+      - name: lint types and code
+        run: yarn lint

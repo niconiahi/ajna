@@ -5,13 +5,22 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "concurrently": "^6.2.0",
+    "lerna": "^4.0.0",
+    "prettier": "^2.3.1",
+    "typescript": "^4.3.4"
   },
   "scripts": {
-    "test": "lerna run test",
-    "watch-build": "lerna run watch-build --scope=@vishuda/pagination",
-    "watch-types": "lerna run watch-types --scope=@vishuda/pagination",
+    "watch:build": "lerna run watch:build --scope=@vishuda/pagination",
+    "watch:types": "lerna run watch:types --scope=@vishuda/pagination",
+    "watch": "concurrently \"yarn watch:build\" \"yarn watch:types\"",
     "dev": "lerna run start --scope=@vishuda/demo",
-    "version": "lerna version --conventional-commits --yes"
+    "version": "lerna version --conventional-commits --yes",
+    "clean:b": "rm -rf node_modules yarn.lock",
+    "clean": "lerna run clean && yarn clean:b",
+    "lint": "lerna run lint --stream",
+    "lint:fix": "lerna run lint:fix --stream",
+    "bootstrap": "yarn clean && lerna bootstrap",
+    "build": "lerna run build --stream"
   }
 }
