@@ -6,4 +6,6 @@ interface IconBaseProps extends React.SVGAttributes<SVGElement> {
   title?: string
 }
 
+export type SeparatorPosition = 'left' | 'right'
+
 export type IconType = (props: IconBaseProps) => JSX.Element

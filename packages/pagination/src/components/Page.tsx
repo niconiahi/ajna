@@ -1,4 +1,4 @@
-import React, { useMemo, FC, ReactElement } from 'react'
+import React, { FC, ReactElement, MouseEvent, useMemo } from 'react'
 import { Button, Flex, ButtonProps } from '@chakra-ui/react'
 
 // lib
@@ -12,8 +12,14 @@ import { Separator } from './Separator'
 
 export interface PageProps {
   page: number
-  separator?: ReactElement
+  separator?: ReactElement<ButtonProps>
   _current?: ButtonProps
+}
+
+const buttonStyles: ButtonProps = {
+  minW: 'auto',
+  px: 1,
+  cursor: 'pointer'
 }
 
 export const Page: FC<PageProps & ButtonProps> = ({ page, isDisabled: isDisabledProp, separator, _current = {}, ...buttonProps }) => {
@@ -25,32 +31,42 @@ export const Page: FC<PageProps & ButtonProps> = ({ page, isDisabled: isDisabled
     isDisabled: isDisabledGlobal
   } = state
 
-  // constants
-  const isDisabled = isDisabledProp ?? isDisabledGlobal
-  const isCurrent = currentPage === page
-  const isLeftSeparator = page === SEPARATORS.left
-  const isRightSeparator = page === SEPARATORS.right
-  const pageLabel = isCurrent
-    ? `Current page, page ${page}`
-    : `Go to page ${page}`
+  // methods
+  const getPageProps = ({ onClick, isDisabled: _isDisabled, ...props }: ButtonProps): ButtonProps => ({
+    ...props,
+    'aria-disabled': isDisabled,
+    'aria-current': isCurrent,
+    'aria-label': pageLabel,
+    isDisabled,
+    onClick: (event: MouseEvent<HTMLButtonElement>) => {
+      if (!isDisabled) {
+        onClick?.(event)
+      }
+      changePage(page)
+    }
+  })
 
   // memos
-  const baseButtonProps: ButtonProps = useMemo(
-    () => ({
-      minW: 'auto',
-      px: 1,
-      pointerEvents: isDisabled ? 'none' : 'auto',
-      cursor: 'pointer',
-      onClick: (): void => changePage(page)
-    }),
-    [changePage, isDisabled, page]
-  )
+  const isCurrent = useMemo(() => currentPage === page, [currentPage, page])
+  const isDisabled = useMemo(() => isDisabledProp ?? isDisabledGlobal, [isDisabledGlobal, isDisabledProp])
+  const isSeparatorDisabled = useMemo(() => separator?.props?.isDisabled ?? isDisabledGlobal, [isDisabledGlobal, isDisabledProp])
+  const currentStyles = useMemo(() => isCurrent ? _current : {}, [isCurrent, _current])
+  const isLeftSeparator = useMemo(() => page === SEPARATORS.left, [page])
+  const isRightSeparator = useMemo(() => page === SEPARATORS.right, [page])
+  const pageLabel = useMemo(() => isCurrent
+    ? `Current page, page ${page}`
+    : `Go to page ${page}`, [isCurrent, page])
+  const allProps = useMemo(() => ({
+    ...buttonStyles,
+    ...buttonProps,
+    ...currentStyles
+  }), [buttonStyles, buttonProps, currentStyles])
 
   if (isLeftSeparator) {
     return (
       <Separator
         hoverIcon={FiChevronLeft}
-        isDisabled={isDisabled}
+        isDisabled={isSeparatorDisabled}
         separatorPosition='left'
         {...(separator?.props ?? {})}
       />
@@ -61,26 +77,18 @@ export const Page: FC<PageProps & ButtonProps> = ({ page, isDisabled: isDisabled
     return (
       <Separator
         hoverIcon={FiChevronRight}
-        isDisabled={isDisabled}
+        isDisabled={isSeparatorDisabled}
         separatorPosition='right'
         {...(separator?.props ?? {})}
       />
     )
   }
 
-  // TODO: implement getPageProps
-
   return (
     <Flex as='li'>
       <Button
         className='pagination-page'
-        aria-label={pageLabel}
-        {...baseButtonProps}
-        {...buttonProps}
-        isDisabled={isDisabled}
-        {...(isDisabled ? { 'aria-disabled': true } : {})}
-        {...(isCurrent ? { 'aria-current': true } : {})}
-        {...(isCurrent ? { ..._current } : {})}
+        {...getPageProps(allProps)}
       >
         {page}
       </Button>

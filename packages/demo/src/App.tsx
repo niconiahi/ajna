@@ -93,13 +93,18 @@ const Demo: FC = () => {
         onPageChange={handlePageChange}
       >
         <Container align='center' justify='space-between' p={4} w='full'>
-          <Previous>
+          <Previous bg='yellow.300' isDisabled onClick={() => console.error("I'm clicking the previous")}>
             <Text>Previous</Text>
           </Previous>
-          <PageGroup isInline align='center' separator={<Separator bg='red.300' fontSize='sm' w={7} />}>
+          <PageGroup isInline align='center' separator={<Separator isDisabled onClick={() => console.error("I'm clicking the separator")} bg='blue.300' fontSize='sm' w={7} jumpSize={11} />}>
             {pages.map((page: number) => (
               <Page
+                w={7}
+                bg='red.300'
                 key={`pagination_page_${page}`}
+                page={page}
+                onClick={() => console.error('Im clicking the page')}
+                fontSize='sm'
                 _hover={{
                   bg: 'green.300'
                 }}
@@ -111,20 +116,16 @@ const Demo: FC = () => {
                   fontSize: 'sm',
                   w: 7
                 }}
-                bg='red.300'
-                fontSize='sm'
-                page={page}
-                w={7}
               />
             ))}
           </PageGroup>
-          <Next>
+          <Next bg='yellow.300' onClick={() => console.error("I'm clicking the next")}>
             <Text>Next</Text>
           </Next>
         </Container>
       </Pagination>
       <Center w='full'>
-        <Button onClick={handleDisableClick}>Disable ON / OFF</Button>
+        <Button bg='purple.300' onClick={handleDisableClick}>Disable ON / OFF</Button>
         <Select ml={3} onChange={handlePageSizeChange} w={40}>
           <option value='10'>10</option>
           <option value='25'>25</option>
