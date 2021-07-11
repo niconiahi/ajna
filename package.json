@@ -13,7 +13,7 @@
     "watch:build": "lerna run watch:build --scope=@vishuda/pagination",
     "watch:types": "lerna run watch:types --scope=@vishuda/pagination",
     "watch": "concurrently \"yarn watch:build\" \"yarn watch:types\"",
-    "dev": "lerna run start --scope=@vishuda/demo",
+    "dev": "lerna run dev --scope=@vishuda/playground",
     "version": "lerna version --conventional-commits --yes",
     "clean:b": "rm -rf node_modules yarn.lock",
     "clean": "lerna run clean && yarn clean:b",

@@ -5,17 +5,17 @@ import {
   Select,
   Text,
   Button,
-  ChakraProvider
+  Stack
 } from '@chakra-ui/react'
 import {
   Pagination,
-  Container,
-  Separator,
-  Previous,
-  Page,
   usePagination,
-  Next,
-  PageGroup
+  PaginationPage,
+  PaginationNext,
+  PaginationPrevious,
+  PaginationPageGroup,
+  PaginationContainer,
+  PaginationSeparator
 } from '@vishuda/pagination'
 
 const fetchPokemons = async (pageSize: number, offset: number): Promise<any> => {
@@ -24,7 +24,7 @@ const fetchPokemons = async (pageSize: number, offset: number): Promise<any> => 
   ).then(async (res) => await res.json())
 }
 
-const Playground: FC = () => {
+const Home: FC = () => {
   // states
   const [pokemonsTotal, setPokemonsTotal] = useState<number | undefined>(
     undefined
@@ -85,20 +85,28 @@ const Playground: FC = () => {
   }
 
   return (
-    <ChakraProvider>
+    <Stack>
       <Pagination
         pagesCount={pagesCount}
         currentPage={currentPage}
         isDisabled={isDisabled}
         onPageChange={handlePageChange}
       >
-        <Container align='center' justify='space-between' p={4} w='full'>
-          <Previous bg='yellow.300' isDisabled onClick={() => console.error("I'm clicking the previous")}>
-            <Text>Previous</Text>
-          </Previous>
-          <PageGroup isInline align='center' separator={<Separator isDisabled onClick={() => console.error("I'm clicking the separator")} bg='blue.300' fontSize='sm' w={7} jumpSize={11} />}>
+        <PaginationContainer align='center' justify='space-between' p={4} w='full'>
+          <PaginationPrevious
+            _hover={{
+              bg: 'yellow.400'
+            }} bg='yellow.300' isDisabled onClick={() => console.error("I'm clicking the previous")}
+          >
+            <Text>PaginationPrevious</Text>
+          </PaginationPrevious>
+          <PaginationPageGroup
+            isInline
+            align='center'
+            separator={<PaginationSeparator isDisabled onClick={() => console.error("I'm clicking the separator")} bg='blue.300' fontSize='sm' w={7} jumpSize={11} />}
+          >
             {pages.map((page: number) => (
-              <Page
+              <PaginationPage
                 w={7}
                 bg='red.300'
                 key={`pagination_page_${page}`}
@@ -109,23 +117,31 @@ const Playground: FC = () => {
                   bg: 'green.300'
                 }}
                 _current={{
-                  _hover: {
-                    bg: 'blue.300'
-                  },
                   bg: 'green.300',
                   fontSize: 'sm',
                   w: 7
                 }}
               />
             ))}
-          </PageGroup>
-          <Next bg='yellow.300' onClick={() => console.error("I'm clicking the next")}>
-            <Text>Next</Text>
-          </Next>
-        </Container>
+          </PaginationPageGroup>
+          <PaginationNext
+            _hover={{
+              bg: 'yellow.400'
+            }}
+            bg='yellow.300' onClick={() => console.error("I'm clicking the next")}
+          >
+            <Text>PaginationNext</Text>
+          </PaginationNext>
+        </PaginationContainer>
       </Pagination>
       <Center w='full'>
-        <Button bg='purple.300' onClick={handleDisableClick}>Disable ON / OFF</Button>
+        <Button
+          _hover={{
+            bg: 'purple.400'
+          }}
+          bg='purple.300' onClick={handleDisableClick}
+        >Disable ON / OFF
+        </Button>
         <Select ml={3} onChange={handlePageSizeChange} w={40}>
           <option value='10'>10</option>
           <option value='25'>25</option>
@@ -145,8 +161,8 @@ const Playground: FC = () => {
           </Center>
         ))}
       </Grid>
-    </ChakraProvider>
+    </Stack>
   )
 }
 
-export default Playground
+export default Home
