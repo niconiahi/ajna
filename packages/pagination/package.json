@@ -19,8 +19,8 @@
     "prebuild": "rm -rf dist",
     "build": "rollup --config rollup.config.js",
     "build:types": "tsc --declaration --emitDeclarationOnly --declarationDir dist",
-    "lint": "eslint . --ext ts --ext tsx",
-    "lint:fix": "ts-standard --fix",
+    "lint": "ts-standard src --ext ts,tsx",
+    "lint:fix": "yarn lint --fix",
     "lint:types": "tsc --noEmit",
     "watch:types": "yarn build:types --watch",
     "watch:build": "yarn build --watch"
@@ -68,6 +68,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.30.0",
+    "standard": "^16.0.3",
     "ts-standard": "^10.0.0",
     "typescript": "~4.3.5"
   },
