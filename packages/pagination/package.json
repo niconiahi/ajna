@@ -4,14 +4,10 @@
   "name": "@vishuda/pagination",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "author": {
-    "name": "Nicolas Accetta",
-    "email": "nicolas.accetta@gmail.com",
-    "url": "https://github.com/niconiahi/"
-  },
+  "author": "Nicolas Accetta <nicolas.accetta@gmail.com> (https://github.com/niconiahi/)",
   "repository": {
     "type": "git",
-    "url": "git@github.com:niconiahi/vishuda.git"
+    "url": "git+ssh://git@github.com/niconiahi/vishuda.git"
   },
   "keywords": [
     "chakra-ui",
@@ -85,5 +81,10 @@
     "**/*.{ts,tsx}": [
       "yarn lint:fix"
     ]
-  }
+  },
+  "description": "## Table of Contents",
+  "bugs": {
+    "url": "https://github.com/niconiahi/vishuda/issues"
+  },
+  "license": "MIT"
 }
