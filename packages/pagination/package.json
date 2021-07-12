@@ -86,5 +86,6 @@
   "bugs": {
     "url": "https://github.com/niconiahi/vishuda/issues"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "0dd4e3534d5287d5dd40252248c8b8db04c99a80"
 }
