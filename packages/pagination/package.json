@@ -1,19 +1,19 @@
 {
   "version": "1.0.0",
-  "homepage": "https://github.com/niconiahi/vishuda",
-  "name": "@vishuda/pagination",
+  "homepage": "https://github.com/niconiahi/ajna",
+  "name": "@ajna/pagination",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "author": "Nicolas Accetta <nicolas.accetta@gmail.com> (https://github.com/niconiahi/)",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/niconiahi/vishuda.git"
+    "url": "git+ssh://git@github.com/niconiahi/ajna.git"
   },
   "keywords": [
     "chakra-ui",
     "react",
     "pagination",
-    "vishuda"
+    "ajna"
   ],
   "scripts": {
     "start": "react-scripts start",
@@ -84,7 +84,8 @@
   },
   "description": "## Table of Contents",
   "bugs": {
-    "url": "https://github.com/niconiahi/vishuda/issues"
+    "url": "https://github.com/niconiahi/ajna/issues"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "df96b74420351286d3e49db2346ad954e60afc88"
 }

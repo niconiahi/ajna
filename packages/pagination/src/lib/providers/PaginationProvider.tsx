@@ -67,7 +67,7 @@ export const PaginationProvider: FC<PaginationProviderProps> = ({
   useEffect(() => {
     if (isDecimalNumber(currentPageProp)) {
       console.error(
-        'Vishuda Pagination -> passed down currentPage has to be a whole number'
+        'Ajna pagination -> passed down currentPage has to be a whole number'
       )
 
       return
@@ -75,7 +75,7 @@ export const PaginationProvider: FC<PaginationProviderProps> = ({
 
     if (currentPageProp < 1) {
       console.error(
-        'Vishuda Pagination -> passed down currentPage can\'t be lower than 1'
+        'Ajna pagination -> passed down currentPage can\'t be lower than 1'
       )
 
       return

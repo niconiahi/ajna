@@ -1,5 +1,5 @@
 {
-  "name": "@vishuda/playground",
+  "name": "@ajna/playground",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@vishuda/pagination": "1.0.0",
+    "@ajna/pagination": "1.0.0",
     "@chakra-ui/react": "^1.6.5",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",

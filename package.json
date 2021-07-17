@@ -1,5 +1,5 @@
 {
-  "name": "vishuda",
+  "name": "ajna",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -10,10 +10,10 @@
     "typescript": "^4.3.4"
   },
   "scripts": {
-    "watch:build": "lerna run watch:build --scope=@vishuda/pagination",
-    "watch:types": "lerna run watch:types --scope=@vishuda/pagination",
+    "watch:build": "lerna run watch:build --scope=@ajna/pagination",
+    "watch:types": "lerna run watch:types --scope=@ajna/pagination",
     "watch": "concurrently \"yarn watch:build\" \"yarn watch:types\"",
-    "dev": "lerna run dev --scope=@vishuda/playground",
+    "dev": "lerna run dev --scope=@ajna/playground",
     "version": "lerna version --conventional-commits --yes",
     "publish": "lerna publish -y from-package",
     "clean:b": "rm -rf node_modules yarn.lock",

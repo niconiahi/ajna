@@ -16,7 +16,7 @@ import {
   PaginationPageGroup,
   PaginationContainer,
   PaginationSeparator
-} from '@vishuda/pagination'
+} from '@ajna/pagination'
 
 const fetchPokemons = async (pageSize: number, offset: number): Promise<any> => {
   return await fetch(
