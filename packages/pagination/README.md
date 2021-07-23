@@ -49,7 +49,7 @@ yarn add chakra-paginator
 
 ## Demo with all options applied
 
-## [Check it out in this Sandbox](https://codesandbox.io/s/chakra-paginator-demo-4n2gd)
+### [Check it out in this Sandbox](https://codesandbox.io/s/ajna-pagination-forked-7mrtq)
 
 <br />
 
