@@ -15,7 +15,7 @@
     "watch": "concurrently \"yarn watch:build\" \"yarn watch:types\"",
     "dev": "lerna run dev --scope=@ajna/playground",
     "version": "lerna version --conventional-commits --yes",
-    "publish": "lerna publish --conventional-commits from-git",
+    "publish": "lerna publish --conventional-commits from-package",
     "clean:b": "rm -rf node_modules yarn.lock",
     "clean": "lerna run clean && yarn clean:b",
     "lint": "lerna run lint --stream",
