@@ -14,7 +14,6 @@
     "watch:types": "lerna run watch:types --scope=@ajna/pagination",
     "watch": "concurrently \"yarn watch:build\" \"yarn watch:types\"",
     "dev": "lerna run dev --scope=@ajna/playground",
-    "version": "lerna version --scope=@ajna/pagination --conventional-commits --yes",
     "publish": "lerna publish from-package",
     "clean:b": "rm -rf node_modules yarn.lock",
     "clean": "lerna run clean && yarn clean:b",

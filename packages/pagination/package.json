@@ -19,6 +19,7 @@
     "start": "react-scripts start",
     "clean": "rm -rf node_modules yarn.lock",
     "prebuild": "rm -rf dist",
+    "version": "lerna version --conventional-commits",
     "build": "rollup --config rollup.config.js",
     "build:types": "tsc --declaration --emitDeclarationOnly --declarationDir dist",
     "lint": "ts-standard src --ext ts,tsx",
