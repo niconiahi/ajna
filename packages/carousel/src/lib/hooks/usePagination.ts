@@ -9,16 +9,14 @@ interface InitialState {
   isDisabled?: boolean
 }
 
-interface Limits {
-  inner: number
-  outer: number
-}
-
 interface UsePagination {
   initialState: InitialState
   total?: number
   pagesCount?: number
-  limits?: Limits
+  limits?: {
+    inner: number
+    outer: number
+  }
 }
 
 export const usePagination = ({

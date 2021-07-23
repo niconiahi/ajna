@@ -5,16 +5,16 @@
 - [Version](#version)
 - [Installation](#installation)
 - [Demo with all options applied](#demo-with-all-options-applied)
-- [Components](#components)
+- [Components API](#components-api)
   - [Pagination](#pagination)
-  - [PaginationContainer](#paginationcontainer)
-  - [PaginationPageGroup](#paginationpagegroup)
-  - [PaginationPrevious](#paginationprevious)
-  - [PaginationNext](#paginationnext)
-  - [PaginationPage](#paginationpage)
-  - [PaginationSeparator](#paginationseparator)
-- [Hooks](#hooks)
-  - [usePagination](#usepagination)
+  - [PaginationContainer](#pagination-container)
+  - [PaginationPageGroup](#pagination-pagegroup)
+  - [PaginationPrevious](#pagination-previous)
+  - [PaginationNext](#pagination-next)
+  - [PaginationPage](#pagination-page)
+  - [PaginationSeparator](#pagination-separator)
+- [Hooks API](#hooks-api)
+  - [usePagination](#usepaginator)
 - [Usage](#usage)
   - [Minimal](#minimal)
   - [Styling](#styling)
@@ -22,7 +22,7 @@
   - [Page size](#page-size)
   - [Limits](#limits)
   - [Offset](#offset)
-  - [Total](#total)
+  - [Pages quantity](#pages-quantity)
   - [Full usage example](#full-usage-example)
 
 ## Version
@@ -53,99 +53,83 @@ yarn add chakra-paginator
 
 <br />
 
-## Components
+## Components API
 
 <br />
 
 ### Pagination
 
-| Prop         | Description                                                  | Type                          | Default | Required |
-| ------------ | ------------------------------------------------------------ | ----------------------------- | ------- | -------- |
-| pagesCount   | The total number of pages                                    | number                        |         | yes      |
-| currentPage  | The page which is currently being selected                   | number                        |         | yes      |
-| onPageChange | On change handler which returns the last selected page       | (currentPage: number) => void |         | yes      |
-| isDisabled   | Denotates if all items on the pagination are disabled or not | boolean                       | false   | no       |
+| Prop            | Description                                                                                                                                                | Type                       | Default | Required |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | ------- | -------- |
+| pagesQuantity   | The total number of pages, calculated based on Backend data                                                                                                | number                     | 0       | yes      |
+| onPageChange    | On change handler which returns the last selected page                                                                                                     | (nextPage: number) => void |         | yes      |
+| isDisabled      | Disables all of the pagination components. You can always disable each individual component via the isDisabled prop, as the components render HTML buttons | boolean                    | false   | no       |
+| activeStyles    | The styles of the active page button                                                                                                                       | ButtonProps                | {}      | no       |
+| normalStyles    | The styles of the inactive page buttons                                                                                                                    | ButtonProps                | {}      | no       |
+| separatorStyles | The styles of the separator wrapper                                                                                                                        | ButtonProps                | {}      | no       |
+| outerLimit      | The amount of pages to show at the start and at the end                                                                                                    | number                     | 0       | no       |
+| innerLimit      | The amount of pages to show from the _currentPage_ backwards and forward                                                                                   | number                     | 0       | no       |
+| currentPage     | Manually set the _currentPage_ of the pagination                                                                                                           | number                     | 1       | no       |
 
 <br />
 
-### PaginationContainer
-
-```
-PaginationContainer is a _Flex_ component, so any _FlexProps_ are accepted
-```
-
-<br />
-
-### PaginationPageGroup
-
-```
-PaginationPageGroup is a _Stack_ component, so any _StackProps_ are accepted
-```
-
-<br />
-
-### PaginationPrevious
-
-```
-PaginationPrevious is a _Button_ component, so any _ButtonProps_ are accepted
-```
-
-<br />
-
-### PaginationNext
-
-```
-PaginationNext is a _Button_ component, so any _ButtonProps_ are accepted
-```
-
-<br />
-
-### PaginationPage
-
-```
-PaginationPage is a _Button_ component, so any _ButtonProps_ are accepted
-```
-
-<br />
-
-### PaginationSeparator
-
-```
-PaginationSeparator is a _Button_ component, so any _ButtonProps_ are accepted
-```
-
-<br />
-
-## Hooks
-
-### usePagination
+### usePaginator
 
 <br />
 
 #### Options
 
-| Prop         | Description                                                     | Type         | Default   | Required |
-| ------------ | --------------------------------------------------------------- | ------------ | --------- | -------- |
-| initialState | Initial states for pagination values                            | InitialState |           | yes      |
-| total        | The total amount of items from the endpoint you are consuming   | number       | undefined | no       |
-| limits       | The limits cut the amount of pages to show                      | Limits       | undefined | no       |
-| pagesCount   | If the amount of pages is manually set, it will take precedence | number       | undefined | no       |
+| Prop         | Description                                            | Type         | Default | Required |
+| ------------ | ------------------------------------------------------ | ------------ | ------- | -------- |
+| total        | The total amount of items obtained from a Backend call | number       | 0       | no       |
+| initialState | Initial states for pagination values                   | InitialState |         | yes      |
 
 <br />
 
 #### Returned values
 
-| Prop           | Description                                                  | Type                              | Default   |
-| -------------- | ------------------------------------------------------------ | --------------------------------- | --------- |
-| offset         | Offset value generated                                       | number                            | 0         |
-| pages          | The array of pages to render                                 | number[]                          | []        |
-| pagesCount     | The total amount of pages                                    | number                            | 0         |
-| currentPage    | The page which is currently being selected                   | number                            |           |
-| pageSize       | The amount of items per page                                 | number                            | undefined |
-| isDisabled     | Denotates if all items on the pagination are disabled or not | boolean                           | false     |
-| setPageSize    | A setter for the isDisabled value                            | Dispatch<SetStateAction<number>>  |           |
-| setIsDisabled  | A setter for the isDisabled value                            | Dispatch<SetStateAction<boolean>> |           |
-| setCurrentPage | A setter for the currentPage value                           | Dispatch<SetStateAction<number>>  |           |
+| Prop           | Description                                                                                                                                                | Type                                | Default | Required |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------- | -------- |
+| offset         | Generic offset value generated if pageSize is provided                                                                                                     | number                              | 0       | no       |
+| pagesQuantity  | Automatically calculated based on total and pageSize. Keep in mind that you can pass this directly to Paginator. This is a commodity if you know the total | number                              | 0       | no       |
+| currentPage    | The current page number                                                                                                                                    | number                              |         | yes      |
+| pageSize       | The amount of items per page                                                                                                                               | number                              | 10      | no       |
+| isDisabled     | Disabled or enables all the pagination components                                                                                                          | boolean                             | false   | no       |
+| setPageSize    | A setter for the pageSize value                                                                                                                            | Dispatch<SetStateAction <number> >  |         | no       |
+| setIsDisabled  | A setter for the isDisabled value                                                                                                                          | Dispatch<SetStateAction <boolean> > |         | no       |
+| setCurrentPage | A setter for the currentPage value                                                                                                                         | Dispatch<SetStateAction <number> >  |         | yes      |
+
+<br />
+
+### Container
+
+```
+Container is a _Flex_ component, so any _FlexProps_ are accepted
+```
+
+<br />
+
+### PageGroup
+
+```
+PageGroup is a _Stack_ component, so any _StackProps_ are accepted
+```
+
+<br />
+
+### Previous
+
+```
+Previous is a _Button_ component, so any _ButtonProps_ are accepted
+```
+
+<br />
+
+### Next
+
+```
+Next is a _Button_ component, so any _ButtonProps_ are accepted
+```
 
 <br />
 
@@ -172,7 +156,7 @@ import {
   usePagination,
 } from "@ajna/pagination";
 
-const Minimal: FC = () => {
+const Demo: FC = () => {
   const { currentPage, setCurrentPage, pagesCount } = usePagination({
     pagesCount: 12,
     initialState: { currentPage: 1 },
@@ -185,14 +169,25 @@ const Minimal: FC = () => {
         currentPage={currentPage}
         onPageChange={handlePageChange}
       >
-        <PaginationContainer>
-          <PaginationPrevious>Previous</PaginationPrevious>
-          <PaginationPageGroup>
+        <PaginationContainer
+          align="center"
+          justify="space-between"
+          w="full"
+          p={4}
+        >
+          <PaginationPrevious>
+            Previous
+            {/* Or an icon from `react-icons` */}
+          </PaginationPrevious>
+          <PaginationPageGroup isInline align="center">
             {pages.map((page: number) => (
               <PaginationPage key={`pagination_page_${page}`} page={page} />
             ))}
           </PaginationPageGroup>
-          <PaginationNext>Next</PaginationNext>
+          <PaginationNext>
+            Next
+            {/* Or an icon from `react-icons` */}
+          </PaginationNext>
         </PaginationContainer>
       </Pagination>
     </ChakraProvider>
@@ -207,7 +202,7 @@ export default Demo;
 ### Styling
 
 ```
-The _current prop will contain the props for the page which is currently selected
+The _current prop will contain the styles for the page which is currently selected
 All other props will apply to every other page
 ```
 
@@ -233,18 +228,15 @@ All other props will apply to every other page
 <br />
 
 ```tsx
+
 <PaginationPrevious
   bg="blue.500"
   w="20rem"
   //...any button prop
->
+  >
   Previous
 </PaginationPrevious>
-```
 
-<br />
-
-```tsx
 <PaginationNext
   w={7}
   bg="red.300"
@@ -253,11 +245,7 @@ All other props will apply to every other page
 >
   Next
 </PaginationNext>
-```
 
-<br />
-
-```tsx
 <PaginationContainer
   bg="blue.500"
   w="full"
@@ -265,11 +253,6 @@ All other props will apply to every other page
 >
   ...
 </PaginationContainer>
-```
-
-<br />
-
-```tsx
 <PaginationPageGroup
   bg="blue.500"
   w="full"
@@ -386,28 +369,22 @@ fetchUsingOffset(pageSize, offset).then((data) => {
 
 <br />
 
-### Total
+### Pages quantity
 
 ```
 Keep in mind that if you know the total amount of items of the requested endpoint, which is not
-a strange thing to be returned, you can use that to generate the pages for you
+a strange thing to be returned, you can use that to generate the pages quantity value for you
 ```
 
 ```tsx
-const { pages, pagesCount } = usePaginator({
+const { pagesCount } = usePaginator({
   total: 4021,
   initialState: { pageSize: 5 }
 });
 
-<Pagination
+<Paginator
   pagesCount={pagesCount}
 >
-
-<PaginationPageGroup>
-  {pages.map((page: number) => (
-    <PaginationPage key={`pagination_page_${page}`} page={page} />
-  ))}
-</PaginationPageGroup>
 ```
 
 <br />
