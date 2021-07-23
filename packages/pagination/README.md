@@ -1,4 +1,4 @@
-# Chakra paginator
+# @ajna/pagination
 
 ## Table of Contents
 
