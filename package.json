@@ -21,5 +21,6 @@
     "lint:fix": "lerna run lint:fix --stream",
     "bootstrap": "yarn clean && lerna bootstrap",
     "build": "lerna run build --stream"
-  }
+  },
+  "version": "0.0.0"
 }
