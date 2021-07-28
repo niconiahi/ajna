@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/niconiahi/ajna/compare/@ajna/pagination@1.4.0...@ajna/pagination@1.4.1) (2021-07-28)
+
+
+### Bug Fixes
+
+* remove unuseful class names ([538d330](https://github.com/niconiahi/ajna/commit/538d330d61e328bfe76d5749917977c652ba38e0))
+
+
+
+
+
 # 1.4.0 (2021-07-28)
 
 
