@@ -13,7 +13,7 @@
   "scripts": {
     "watch:build": "lerna run watch:build --scope=@ajna/pagination",
     "watch:types": "lerna run watch:types --scope=@ajna/pagination",
-    "version": "env-cmd lerna version --conventional-commits --create-release github",
+    "version": "env-cmd lerna version --conventional-commits --create-release github --include-merged-tags",
     "watch": "concurrently \"yarn watch:build\" \"yarn watch:types\"",
     "dev": "lerna run dev --scope=@ajna/playground",
     "publish": "lerna publish from-git --dist-tag latest",
