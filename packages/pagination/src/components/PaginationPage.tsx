@@ -16,6 +16,7 @@ export interface PageProps {
   _current?: ButtonProps
 }
 
+// constants
 const buttonStyles: ButtonProps = {
   minW: 'auto',
   px: 1,
