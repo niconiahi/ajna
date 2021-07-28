@@ -1,6 +1,15 @@
 {
   "name": "ajna",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niconiahi/ajna.git"
+  },
+  "author": {
+    "name": "Nicolas Accetta",
+    "email": "nicolas.accetta@gmail.com"
+  },
+  "license": "MIT",
   "workspaces": [
     "packages/*"
   ],
