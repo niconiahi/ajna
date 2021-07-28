@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.4](https://github.com/niconiahi/ajna/compare/@ajna/pagination@1.4.3...@ajna/pagination@1.4.4) (2021-07-28)
+
+
+### Bug Fixes
+
+* add ordering comment ([8569a1d](https://github.com/niconiahi/ajna/commit/8569a1d6e6a47e10472d3cf528b7ba7701519929))
+
+
+
+
+
 ## [1.4.3](https://github.com/niconiahi/ajna/compare/@ajna/pagination@1.4.2...@ajna/pagination@1.4.3) (2021-07-28)
 
 
