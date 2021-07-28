@@ -1,5 +1,5 @@
 {
-  "version": "1.1.2",
+  "version": "1.2.0",
   "homepage": "https://github.com/niconiahi/ajna",
   "name": "@ajna/pagination",
   "main": "./dist/index.js",
@@ -19,7 +19,6 @@
     "start": "react-scripts start",
     "clean": "rm -rf node_modules yarn.lock",
     "prebuild": "rm -rf dist",
-    "version": "lerna version --conventional-commits",
     "build": "rollup --config rollup.config.js",
     "build:types": "tsc --declaration --emitDeclarationOnly --declarationDir dist",
     "lint": "ts-standard src --ext ts,tsx",
