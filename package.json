@@ -12,7 +12,7 @@
   "scripts": {
     "watch:build": "lerna run watch:build --scope=@ajna/pagination",
     "watch:types": "lerna run watch:types --scope=@ajna/pagination",
-    "version": "lerna run version --scope=@ajna/pagination",
+    "version": "lerna run version --conventional-commits",
     "watch": "concurrently \"yarn watch:build\" \"yarn watch:types\"",
     "dev": "lerna run dev --scope=@ajna/playground",
     "publish": "lerna publish from-package",
