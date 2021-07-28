@@ -1,0 +1,4 @@
+10 error Error: A GH_TOKEN environment variable is required.
+10 error     at createGitHubClient (/home/vegan/Documents/projects/ajna/node_modules/@lerna/github-client/lib/github-client.js:17:11)
+10 error     at createReleaseClient (/home/vegan/Documents/projects/ajna/node_modules/@lerna/version/lib/create-release.js:20:14)
+10 error     at VersionCommand.configureProperties (/home/vegan/Documents/projects/ajna/node_modules/@lerna/version/index.js:80:58)
