@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.3](https://github.com/niconiahi/ajna/compare/@ajna/pagination@1.4.2...@ajna/pagination@1.4.3) (2021-07-28)
+
+
+### Bug Fixes
+
+* remove unuseful xmls attribute ([f100b70](https://github.com/niconiahi/ajna/commit/f100b70ea1fcd3f66c4705991a5a6a329ac29e00))
+
+
+
+
+
 ## [1.4.2](https://github.com/niconiahi/ajna/compare/@ajna/pagination@1.4.1...@ajna/pagination@1.4.2) (2021-07-28)
 
 
