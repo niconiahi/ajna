@@ -5,7 +5,6 @@ import { IconType } from '../lib/types'
 
 const FiMoreHorizontal: IconType = ({ ...svgProps }) => (
   <svg
-    className='feather feather-chevron-right'
     fill='none'
     height='24'
     stroke='currentColor'

@@ -5,7 +5,6 @@ import { IconType } from '../lib/types'
 
 const FiChevronLeft: IconType = ({ ...svgProps }) => (
   <svg
-    className='feather feather-chevron-left'
     fill='none'
     height='24'
     stroke='currentColor'
