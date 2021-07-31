@@ -150,17 +150,22 @@ This is the bare minimum set up you need to get it up and working
 import React, { FC, ChangeEvent, useEffect, useState } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import {
-  Paginator,
-  PaginationContainer,
-  PaginationPrevious,
-  PaginationNext,
-  PaginationPageGroup,
-  PaginationPage,
+  Pagination,
   usePagination,
+  PaginationNext,
+  PaginationPage,
+  PaginationPrevious,
+  PaginationContainer,
+  PaginationPageGroup,
 } from "@ajna/pagination";
 
 const Minimal: FC = () => {
-  const { currentPage, setCurrentPage, pagesCount, pages } = usePagination({
+  const {
+    currentPage,
+    setCurrentPage,
+    pagesCount,
+    pages
+  } = usePagination({
     pagesCount: 12,
     initialState: { currentPage: 1 },
   });
@@ -176,7 +181,10 @@ const Minimal: FC = () => {
           <PaginationPrevious>Previous</PaginationPrevious>
           <PaginationPageGroup>
             {pages.map((page: number) => (
-              <PaginationPage key={`pagination_page_${page}`} page={page} />
+              <PaginationPage 
+                key={`pagination_page_${page}`} 
+                page={page} 
+              />
             ))}
           </PaginationPageGroup>
           <PaginationNext>Next</PaginationNext>
