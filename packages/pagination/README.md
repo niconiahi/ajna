@@ -21,6 +21,7 @@
   - [Disabling](#disabling)
   - [Page size](#page-size)
   - [Limits](#limits)
+  - [Separator](#separator)
   - [Offset](#offset)
   - [Total](#total)
   - [Full usage example](#full-usage-example)
@@ -159,7 +160,7 @@ import {
 } from "@ajna/pagination";
 
 const Minimal: FC = () => {
-  const { currentPage, setCurrentPage, pagesCount } = usePagination({
+  const { currentPage, setCurrentPage, pagesCount, pages } = usePagination({
     pagesCount: 12,
     initialState: { currentPage: 1 },
   });
@@ -169,7 +170,7 @@ const Minimal: FC = () => {
       <Pagination
         pagesCount={pagesCount}
         currentPage={currentPage}
-        onPageChange={handlePageChange}
+        onPageChange={setCurrentPage}
       >
         <PaginationContainer>
           <PaginationPrevious>Previous</PaginationPrevious>
