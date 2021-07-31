@@ -1,6 +1,9 @@
 name: Publish new version
 
-on: [tag]
+on:
+  push:
+    tags:
+      - '**'
 
 jobs:
   setup:
