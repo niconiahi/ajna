@@ -27,7 +27,7 @@
 
 ## Version
 
-## [![npm version](https://badge.fury.io/js/chakra-paginator.svg)](https://badge.fury.io/js/chakra-paginator)
+## [![npm version](https://badge.fury.io/js/%40ajna%2Fpagination.svg)](https://badge.fury.io/js/%40ajna%2Fpagination)
 
 <br />
 
@@ -36,13 +36,13 @@
 ### npm
 
 ```bash
-npm i chakra-paginator
+npm i @ajna/pagination
 ```
 
 ### Yarn
 
 ```bash
-yarn add chakra-paginator
+yarn add @ajna/pagination
 ```
 
 <br />
@@ -70,49 +70,37 @@ yarn add chakra-paginator
 
 ### PaginationContainer
 
-```
-PaginationContainer is a _Flex_ component, so any _FlexProps_ are accepted
-```
+It's a **Flex** component, so any **FlexProps** are accepted
 
 <br />
 
 ### PaginationPageGroup
 
-```
-PaginationPageGroup is a _Stack_ component, so any _StackProps_ are accepted
-```
+It's a **Stack** component, so any **StackProps** are accepted
 
 <br />
 
 ### PaginationPrevious
 
-```
-PaginationPrevious is a _Button_ component, so any _ButtonProps_ are accepted
-```
+It's a **Button** component, so any **ButtonProps** are accepted
 
 <br />
 
 ### PaginationNext
 
-```
-PaginationNext is a _Button_ component, so any _ButtonProps_ are accepted
-```
+It's a **Button** component, so any **ButtonProps** are accepted
 
 <br />
 
 ### PaginationPage
 
-```
-PaginationPage is a _Button_ component, so any _ButtonProps_ are accepted
-```
+It's a **Button** component, so any **ButtonProps** are accepted
 
 <br />
 
 ### PaginationSeparator
 
-```
-PaginationSeparator is a _Button_ component, so any _ButtonProps_ are accepted
-```
+It's a **Button** component, so any **ButtonProps** are accepted
 
 <br />
 
@@ -155,9 +143,7 @@ PaginationSeparator is a _Button_ component, so any _ButtonProps_ are accepted
 
 ### Minimal
 
-```
 This is the bare minimum set up you need to get it up and working
-```
 
 ```tsx
 import React, { FC, ChangeEvent, useEffect, useState } from "react";
@@ -206,10 +192,8 @@ export default Demo;
 
 ### Styling
 
-```
-The _current prop will contain the props for the page which is currently selected
+The **\_curent** prop will contain the props for the page which is currently selected
 All other props will apply to every other page
-```
 
 ```tsx
 <PaginationPage
@@ -283,9 +267,7 @@ All other props will apply to every other page
 
 ### Disabling
 
-```
 It's provided a commodity disable prop to disable/enable all your pagination components at once
-```
 
 ```tsx
 const { isDisabled, setIsDisabled } = usePagination({
@@ -305,9 +287,7 @@ const handleDisableClick = () => {
 
 ### Page size
 
-```
 It's provided a commodity page size setter and getter
-```
 
 ```tsx
 const { pageSize, setPageSize } = usePagination({
@@ -325,10 +305,8 @@ const handlePageSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
 
 ### Limits
 
-```
-You can trim the ammount of pages you show by passing both limits at the same time
-You need to pass them both, otherwise no limits will be applied
-```
+You can trim the ammount of pages you show by passing _both_ **limits** at the same time
+You need to pass them _both_, otherwise no limits will be applied
 
 ```tsx
 const { pages } = usePagination({
@@ -343,9 +321,7 @@ const { pages } = usePagination({
 
 ### Separator
 
-```
 Additionaly, you can customize the separator component used when limits are defined
-```
 
 ```tsx
 <PaginationPageGroup separator={<PaginationSeparator _hover={{ bg: 'purple.500' }} bg='teal.500'>}>
@@ -359,14 +335,12 @@ Additionaly, you can customize the separator component used when limits are defi
 
 ### Offset
 
-```
-It's possible that the API for the pagination you are consuming works with an offset
-One it's calculated and provided for you using the pageSize and currentPage values
-```
+It's possible that the API for the pagination you are consuming works with an **offset**
+One it's calculated and provided for you using the **pageSize** and **currentPage** values
 
-```
 This is calculated with the next formula:
 
+```
 [currentPage * pageSize - pageSize]
 
 currentPage === 1 && pageSize === 5 // offset = 0;
@@ -388,10 +362,8 @@ fetchUsingOffset(pageSize, offset).then((data) => {
 
 ### Total
 
-```
-Keep in mind that if you know the total amount of items of the requested endpoint, which is not
-a strange thing to be returned, you can use that to generate the pages for you
-```
+Keep in mind that if you know the **total** amount of items of the requested endpoint, which is not
+a strange thing to be returned, you can use that to generate the **pages** for you
 
 ```tsx
 const { pages, pagesCount } = usePaginator({
@@ -414,10 +386,8 @@ const { pages, pagesCount } = usePaginator({
 
 ### Full usage example
 
-```
 In this example you can see all the possible features provided by the library being applied
 to show 10 pokemons names, with the ability to play with the page size and disable state
-```
 
 ```tsx
 import React, { FC, ChangeEvent, useEffect, useState } from "react";
