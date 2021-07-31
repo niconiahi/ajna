@@ -150,11 +150,11 @@ import React, { FC, ChangeEvent, useEffect, useState } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import {
   Paginator,
-  Container,
-  Previous,
-  Next,
-  PageGroup,
-  Page,
+  PaginationContainer,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationPageGroup,
+  PaginationPage,
   usePagination,
 } from "@ajna/pagination";
 
