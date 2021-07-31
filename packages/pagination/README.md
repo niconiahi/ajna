@@ -423,6 +423,7 @@ const Full: FC = () => {
   const outerLimit = 2;
   const innerLimit = 2;
 
+  // pagination hook
   const {
     pages,
     pagesCount,
@@ -445,6 +446,7 @@ const Full: FC = () => {
       currentPage: 1,
     },
   });
+
   // effects
   useEffect(() => {
     fetchPokemons(pageSize, offset)
