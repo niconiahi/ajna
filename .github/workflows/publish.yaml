@@ -1,0 +1,28 @@
+name: Publish new version
+
+on: [tag]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: "0"
+
+      - name: setup node
+        uses: actions/setup-node@master
+        with: 
+          node-version: 12.x
+
+      - name: restore lerna 
+        uses: actions/cache@v2
+        with: 
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: publishes latest version
+        run: yarn run publish -- -y
