@@ -27,5 +27,13 @@ jobs:
             */*/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
+      - name: sets up npm authentication
+        run: |
+          cat > .npmrc <<EOF
+          //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+          registry=https://registry.npmjs.org/
+          always-auth=true
+          EOF
+
       - name: publishes latest version
         run: yarn run publish -- -y
