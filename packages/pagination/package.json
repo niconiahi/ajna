@@ -1,5 +1,5 @@
 {
-  "version": "1.4.4",
+  "version": "1.4.5",
   "homepage": "https://github.com/niconiahi/ajna",
   "name": "@ajna/pagination",
   "main": "./dist/index.js",
