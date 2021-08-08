@@ -1,16 +1,26 @@
-import React, { FC, ReactElement, cloneElement, Children } from 'react'
-import { Stack, StackProps } from '@chakra-ui/react'
+import React, { FC, ReactElement, cloneElement, Children } from "react"
+import { Stack, StackProps } from "@chakra-ui/react"
 
-interface Props {
+export type PageGroupProps = {
   separator?: ReactElement
 }
 
-export const PaginationPageGroup: FC<Props & StackProps> = ({ children, separator, ...stackProps }) => {
+export const PaginationPageGroup: FC<PageGroupProps & StackProps> = ({
+  children,
+  separator,
+  ...stackProps
+}) => {
   // TODO: implement getPageGroupProp
 
   return (
-    <Stack className='pagination-page-group' isInline as='ol' spacing={1} {...stackProps}>
-      {Children.map((children), (child) => {
+    <Stack
+      className="pagination-page-group"
+      isInline
+      as="ol"
+      spacing={1}
+      {...stackProps}
+    >
+      {Children.map(children, (child) => {
         if (child == null) return
 
         // @ts-expect-error We know it's a Page component for now

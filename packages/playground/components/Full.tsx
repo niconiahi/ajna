@@ -1,12 +1,5 @@
-import React, { FC, ChangeEvent, useEffect, useState } from 'react'
-import {
-  Grid,
-  Center,
-  Select,
-  Text,
-  Button,
-  Stack
-} from '@chakra-ui/react'
+import React, { FC, ChangeEvent, useEffect, useState } from "react"
+import { Grid, Center, Select, Text, Button, Stack } from "@chakra-ui/react"
 import {
   Pagination,
   usePagination,
@@ -15,19 +8,22 @@ import {
   PaginationPrevious,
   PaginationPageGroup,
   PaginationContainer,
-  PaginationSeparator
-} from '@ajna/pagination'
+  PaginationSeparator,
+} from "@ajna/pagination"
 
-const fetchPokemons = async (pageSize: number, offset: number): Promise<any> => {
+const fetchPokemons = async (
+  pageSize: number,
+  offset: number,
+): Promise<any> => {
   return await fetch(
-    `https://pokeapi.co/api/v2/pokemon?limit=${pageSize}&offset=${offset}`
+    `https://pokeapi.co/api/v2/pokemon?limit=${pageSize}&offset=${offset}`,
   ).then(async (res) => await res.json())
 }
 
 const Full: FC = () => {
   // states
   const [pokemonsTotal, setPokemonsTotal] = useState<number | undefined>(
-    undefined
+    undefined,
   )
   const [pokemons, setPokemons] = useState<any[]>([])
 
@@ -44,36 +40,38 @@ const Full: FC = () => {
     setIsDisabled,
     isDisabled,
     pageSize,
-    setPageSize
+    setPageSize,
   } = usePagination({
     total: pokemonsTotal,
     limits: {
       outer: outerLimit,
-      inner: innerLimit
+      inner: innerLimit,
     },
     initialState: {
       pageSize: 5,
       isDisabled: false,
-      currentPage: 1
-    }
+      currentPage: 1,
+    },
   })
   // effects
   useEffect(() => {
-    fetchPokemons(pageSize, offset).then((pokemons) => {
-      setPokemonsTotal(pokemons.count)
-      setPokemons(pokemons.results)
-    }).catch((error) => console.error('App =>', error))
+    fetchPokemons(pageSize, offset)
+      .then((pokemons) => {
+        setPokemonsTotal(pokemons.count)
+        setPokemons(pokemons.results)
+      })
+      .catch((error) => console.error("App =>", error))
   }, [currentPage, pageSize, offset])
 
   // handlers
   const handlePageChange = (nextPage: number): void => {
     // -> request new data using the page number
     setCurrentPage(nextPage)
-    console.log('request new data with ->', nextPage)
+    console.log("request new data with ->", nextPage)
   }
 
   const handlePageSizeChange = (
-    event: ChangeEvent<HTMLSelectElement>
+    event: ChangeEvent<HTMLSelectElement>,
   ): void => {
     const pageSize = Number(event.target.value)
 
@@ -92,71 +90,91 @@ const Full: FC = () => {
         isDisabled={isDisabled}
         onPageChange={handlePageChange}
       >
-        <PaginationContainer align='center' justify='space-between' p={4} w='full'>
+        <PaginationContainer
+          align="center"
+          justify="space-between"
+          p={4}
+          w="full"
+        >
           <PaginationPrevious
             _hover={{
-              bg: 'yellow.400'
-            }} bg='yellow.300' isDisabled onClick={() => console.warn("I'm clicking the previous")}
+              bg: "yellow.400",
+            }}
+            bg="yellow.300"
+            isDisabled
+            onClick={() => console.warn("I'm clicking the previous")}
           >
             <Text>Previous</Text>
           </PaginationPrevious>
           <PaginationPageGroup
             isInline
-            align='center'
-            separator={<PaginationSeparator isDisabled onClick={() => console.warn("I'm clicking the separator")} bg='blue.300' fontSize='sm' w={7} jumpSize={11} />}
+            align="center"
+            separator={
+              <PaginationSeparator
+                isDisabled
+                onClick={() => console.warn("I'm clicking the separator")}
+                bg="blue.300"
+                fontSize="sm"
+                w={7}
+                jumpSize={11}
+              />
+            }
           >
             {pages.map((page: number) => (
               <PaginationPage
                 w={7}
-                bg='red.300'
+                bg="red.300"
                 key={`pagination_page_${page}`}
                 page={page}
-                onClick={() => console.warn('Im clicking the page')}
-                fontSize='sm'
+                onClick={() => console.warn("Im clicking the page")}
+                fontSize="sm"
                 _hover={{
-                  bg: 'green.300'
+                  bg: "green.300",
                 }}
                 _current={{
-                  bg: 'green.300',
-                  fontSize: 'sm',
-                  w: 7
+                  bg: "green.300",
+                  fontSize: "sm",
+                  w: 7,
                 }}
               />
             ))}
           </PaginationPageGroup>
           <PaginationNext
             _hover={{
-              bg: 'yellow.400'
+              bg: "yellow.400",
             }}
-            bg='yellow.300' onClick={() => console.warn("I'm clicking the next")}
+            bg="yellow.300"
+            onClick={() => console.warn("I'm clicking the next")}
           >
             <Text>Next</Text>
           </PaginationNext>
         </PaginationContainer>
       </Pagination>
-      <Center w='full'>
+      <Center w="full">
         <Button
           _hover={{
-            bg: 'purple.400'
+            bg: "purple.400",
           }}
-          bg='purple.300' onClick={handleDisableClick}
-        >Disable ON / OFF
+          bg="purple.300"
+          onClick={handleDisableClick}
+        >
+          Disable ON / OFF
         </Button>
         <Select ml={3} onChange={handlePageSizeChange} w={40}>
-          <option value='10'>10</option>
-          <option value='25'>25</option>
-          <option value='50'>50</option>
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
         </Select>
       </Center>
       <Grid
         gap={3}
         mt={20}
         px={20}
-        templateColumns='repeat(5, 1fr)'
-        templateRows='repeat(2, 1fr)'
+        templateColumns="repeat(5, 1fr)"
+        templateRows="repeat(2, 1fr)"
       >
         {pokemons?.map(({ name }) => (
-          <Center key={name} bg='green.100' p={4}>
+          <Center key={name} bg="green.100" p={4}>
             <Text>{name}</Text>
           </Center>
         ))}

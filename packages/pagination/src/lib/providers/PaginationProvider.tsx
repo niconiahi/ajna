@@ -4,14 +4,14 @@ import React, {
   createContext,
   Dispatch,
   SetStateAction,
-  useEffect
-} from 'react'
+  useEffect,
+} from "react"
 
 // lib
-import { INITIAL_VALUES } from '../constants'
-import { isDecimalNumber } from '../helpers'
+import { INITIAL_VALUES } from "../constants"
+import { isDecimalNumber } from "../helpers"
 
-export interface PaginationContextValues {
+export type PaginationContextValues = {
   state: {
     isDisabled: boolean
     pagesCount: number
@@ -28,16 +28,16 @@ export const PaginationContext = createContext<PaginationContextValues>({
   state: {
     currentPage: INITIAL_VALUES.currentPage,
     isDisabled: INITIAL_VALUES.isDisabled,
-    pagesCount: 0
+    pagesCount: 0,
   },
   actions: {
     setCurrentPage: () => null,
     setIsDisabled: () => null,
-    changePage: () => null
-  }
+    changePage: () => null,
+  },
 })
 
-export interface PaginationProviderProps {
+export type PaginationProviderProps = {
   isDisabled: boolean
   pagesCount: number
   currentPage: number
@@ -49,18 +49,16 @@ export const PaginationProvider: FC<PaginationProviderProps> = ({
   onPageChange,
   pagesCount: pagesCountProp,
   currentPage: currentPageProp,
-  isDisabled: isDisabledProp
+  isDisabled: isDisabledProp,
 }) => {
   // react hooks
   const [currentPage, setCurrentPage] = useState<number>(
-    INITIAL_VALUES.currentPage
+    INITIAL_VALUES.currentPage,
   )
   const [isDisabled, setIsDisabled] = useState<boolean>(
-    INITIAL_VALUES.isDisabled
+    INITIAL_VALUES.isDisabled,
   )
-  const [pagesCount, setPagesCount] = useState<number>(
-    0
-  )
+  const [pagesCount, setPagesCount] = useState<number>(0)
 
   // effects
   useEffect(() => {
@@ -74,7 +72,7 @@ export const PaginationProvider: FC<PaginationProviderProps> = ({
   useEffect(() => {
     if (isDecimalNumber(currentPageProp)) {
       console.error(
-        'Ajna pagination -> passed down currentPage has to be a whole number'
+        "Ajna pagination -> passed down currentPage has to be a whole number",
       )
 
       return
@@ -82,7 +80,7 @@ export const PaginationProvider: FC<PaginationProviderProps> = ({
 
     if (currentPageProp < 1) {
       console.error(
-        'Ajna pagination -> passed down currentPage can\'t be lower than 1'
+        "Ajna pagination -> passed down currentPage can't be lower than 1",
       )
 
       return
@@ -102,13 +100,13 @@ export const PaginationProvider: FC<PaginationProviderProps> = ({
   const state = {
     currentPage,
     pagesCount,
-    isDisabled
+    isDisabled,
   }
 
   const actions = {
     setCurrentPage,
     setIsDisabled,
-    changePage
+    changePage,
   }
 
   return (
