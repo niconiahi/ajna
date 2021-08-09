@@ -35,6 +35,9 @@ jobs:
           always-auth=true
           EOF
 
+      - name: install dependencies
+        run: yarn bootstrap
+
       - name: builds project
         run: yarn run build
 
