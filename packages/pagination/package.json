@@ -19,13 +19,14 @@
     "start": "react-scripts start",
     "clean": "rm -rf node_modules yarn.lock",
     "prebuild": "rm -rf dist",
-    "build": "rollup --config rollup.config.js",
+    "build": "yarn build:src && yarn build:types",
+    "build:src": "rollup --config rollup.config.js",
     "build:types": "tsc --declaration --emitDeclarationOnly --declarationDir dist",
     "lint": "ts-standard src --ext ts,tsx",
     "lint:fix": "yarn lint --fix",
     "lint:types": "tsc --noEmit",
     "watch:types": "yarn build:types --watch",
-    "watch:build": "yarn build --watch"
+    "watch:src": "yarn build:src --watch"
   },
   "publishConfig": {
     "access": "public",
