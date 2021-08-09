@@ -35,5 +35,8 @@ jobs:
           always-auth=true
           EOF
 
+      - name: builds project
+        run: yarn run build
+
       - name: publishes latest version
         run: yarn run publish -- -y
