@@ -40,7 +40,12 @@
     }
   ],
   "rules": {
+    // off
+    "react/prop-types": "off",
+    // error
     "react/sort-prop-types": "error",
-    "react/prop-types": "off"
+    "react-hooks/exhaustive-deps": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "error"
   }
 }

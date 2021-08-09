@@ -93,7 +93,7 @@ export const usePagination = ({
         "Ajna pagination -> passed down outerLimit limit has to be a whole number",
       )
     }
-  }, [limits])
+  }, [innerLimit, limits, outerLimit])
 
   return {
     offset,
