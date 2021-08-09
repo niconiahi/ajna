@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.11](https://github.com/niconiahi/ajna/compare/@ajna/pagination@1.4.10...@ajna/pagination@1.4.11) (2021-08-09)
+
+
+### Bug Fixes
+
+* **build:** generate types on execution ([4c5cc4f](https://github.com/niconiahi/ajna/commit/4c5cc4fc3a640a406116403e54d2a3f4a0bf3cd8))
+
+
+
+
+
 ## [1.4.10](https://github.com/niconiahi/ajna/compare/@ajna/pagination@1.4.9...@ajna/pagination@1.4.10) (2021-07-31)
 
 **Note:** Version bump only for package @ajna/pagination
