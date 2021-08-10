@@ -11,10 +11,22 @@ import {
   PaginationSeparator,
 } from "@ajna/pagination"
 
+type Pokemon = {
+  name: string
+  url: string
+}
+
+type PokemonResponse = {
+  count: number
+  next: string | null
+  previous: string | null
+  results: Pokemon[]
+}
+
 const fetchPokemons = async (
   pageSize: number,
   offset: number,
-): Promise<any> => {
+): Promise<PokemonResponse> => {
   return await fetch(
     `https://pokeapi.co/api/v2/pokemon?limit=${pageSize}&offset=${offset}`,
   ).then(async (res) => await res.json())
@@ -25,7 +37,7 @@ const Full: FC = () => {
   const [pokemonsTotal, setPokemonsTotal] = useState<number | undefined>(
     undefined,
   )
-  const [pokemons, setPokemons] = useState<any[]>([])
+  const [pokemons, setPokemons] = useState<Pokemon[]>([])
 
   // constants
   const outerLimit = 2
