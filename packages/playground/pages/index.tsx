@@ -1,14 +1,14 @@
-import React, { FC } from 'react'
-import { Spacer, Flex } from '@chakra-ui/react'
+import React, { FC } from "react"
+import { Spacer, Flex } from "@chakra-ui/react"
 
 // components
-import Full from '../components/Full'
-import Minimal from '../components/Minimal'
+import Full from "../components/Full"
+import Minimal from "../components/Minimal"
 
 const Home: FC = () => (
-  <Flex direction='column'>
+  <Flex direction="column">
     <Full />
-    <Spacer h='sm' />
+    <Spacer h="sm" />
     <Minimal />
   </Flex>
 )

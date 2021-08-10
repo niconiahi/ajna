@@ -1,9 +1,9 @@
-import union from 'lodash.union'
+import union from "lodash.union"
 
 // lib
-import { SEPARATORS } from '../lib/constants'
+import { SEPARATORS } from "../lib/constants"
 
-interface Arguments {
+type Arguments = {
   pagesCount?: number
   innerLimit: number
   outerLimit: number
@@ -21,7 +21,7 @@ export const generatePages = ({
   pagesCount,
   currentPage,
   innerLimit,
-  outerLimit
+  outerLimit,
 }: Arguments): number[] => {
   if (pagesCount == null) {
     return []
@@ -72,7 +72,7 @@ export const generatePages = ({
   const unduplicatedPages = union(
     [...leftPages],
     [currentPage],
-    [...rightPages]
+    [...rightPages],
   )
 
   const addSeparators = (pages: number[]): number[] =>
@@ -96,5 +96,3 @@ export const generatePages = ({
 
   return pages
 }
-
-export const callAll = (...fns: any) => (...args: any) => fns.forEach((fn: any) => fn?.(...args))

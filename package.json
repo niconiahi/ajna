@@ -16,11 +16,12 @@
   "devDependencies": {
     "concurrently": "^6.2.0",
     "env-cmd": "^10.1.0",
+    "husky": "^7.0.1",
     "lerna": "^4.0.0",
     "typescript": "^4.3.4"
   },
   "scripts": {
-    "watch:build": "lerna run watch:src --scope=@ajna/pagination",
+    "watch:build": "lerna run watch:build --scope=@ajna/pagination",
     "watch:types": "lerna run watch:types --scope=@ajna/pagination",
     "version": "env-cmd lerna version --conventional-commits --create-release github",
     "watch": "concurrently \"yarn watch:build\" \"yarn watch:types\"",
@@ -31,6 +32,7 @@
     "lint": "lerna run lint --stream",
     "lint:fix": "lerna run lint:fix --stream",
     "bootstrap": "yarn clean && lerna bootstrap",
-    "build": "lerna run build --stream"
+    "build": "lerna run build --stream",
+    "prepare": "husky install"
   }
 }

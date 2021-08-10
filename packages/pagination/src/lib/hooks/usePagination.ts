@@ -1,20 +1,20 @@
-import { Dispatch, useState, useMemo, SetStateAction, useEffect } from 'react'
+import { Dispatch, useState, useMemo, SetStateAction, useEffect } from "react"
 
 // lib
-import { generatePages, isDecimalNumber } from '../helpers'
+import { generatePages, isDecimalNumber } from "../helpers"
 
-interface InitialState {
+type InitialState = {
   currentPage: number
   pageSize?: number
   isDisabled?: boolean
 }
 
-interface Limits {
+type Limits = {
   inner: number
   outer: number
 }
 
-interface UsePagination {
+type UsePagination = {
   initialState: InitialState
   total?: number
   pagesCount?: number
@@ -25,7 +25,7 @@ export const usePagination = ({
   total,
   initialState,
   pagesCount: pagesCountProp,
-  limits
+  limits,
 }: UsePagination): {
   offset: number
   pages: number[]
@@ -40,10 +40,10 @@ export const usePagination = ({
   // states
   const [pageSize, setPageSize] = useState<number>(initialState.pageSize ?? 0)
   const [currentPage, setCurrentPage] = useState<number>(
-    initialState.currentPage
+    initialState.currentPage,
   )
   const [isDisabled, setIsDisabled] = useState<boolean>(
-    initialState.isDisabled ?? false
+    initialState.isDisabled ?? false,
   )
 
   // memos
@@ -76,24 +76,24 @@ export const usePagination = ({
         currentPage,
         innerLimit,
         outerLimit,
-        pagesCount
+        pagesCount,
       }),
-    [currentPage, innerLimit, outerLimit, pagesCount]
+    [currentPage, innerLimit, outerLimit, pagesCount],
   )
 
   // effects
   useEffect(() => {
     if (innerLimit != null && isDecimalNumber(innerLimit)) {
       console.error(
-        'Ajna pagination -> passed down inner limit has to be a whole number'
+        "Ajna pagination -> passed down inner limit has to be a whole number",
       )
     }
     if (outerLimit != null && isDecimalNumber(outerLimit)) {
       console.error(
-        'Ajna pagination -> passed down outerLimit limit has to be a whole number'
+        "Ajna pagination -> passed down outerLimit limit has to be a whole number",
       )
     }
-  }, [limits])
+  }, [innerLimit, limits, outerLimit])
 
   return {
     offset,
@@ -104,6 +104,6 @@ export const usePagination = ({
     isDisabled,
     setIsDisabled,
     pages,
-    pagesCount
+    pagesCount,
   }
 }
