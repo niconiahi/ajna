@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint . --ext ts,tsx",
+    "lint:fix": "yarn lint --fix",
+    "lint:types": "tsc --noEmit"
   },
   "dependencies": {
     "@ajna/pagination": "1.0.0",
