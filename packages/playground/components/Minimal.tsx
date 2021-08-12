@@ -27,8 +27,8 @@ const Minimal: FC = () => {
 
   return (
     <Pagination
-      pagesCount={pagesCount}
       currentPage={currentPage}
+      pagesCount={pagesCount}
       onPageChange={handlePageChange}
     >
       <PaginationContainer>

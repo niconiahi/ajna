@@ -14,9 +14,9 @@ export const PaginationPageGroup: FC<PageGroupProps & StackProps> = ({
 
   return (
     <Stack
-      className="pagination-page-group"
       isInline
       as="ol"
+      className="pagination-page-group"
       spacing={1}
       {...stackProps}
     >

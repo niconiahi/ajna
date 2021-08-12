@@ -43,6 +43,7 @@ export const PaginationPrevious: FC<ButtonProps> = ({
       if (!isDisabled) {
         onClick?.(event)
       }
+
       handlePreviousClick()
     },
   })

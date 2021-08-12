@@ -6,9 +6,9 @@ export const PaginationContainer: FC<FlexProps> = ({
   ...flexProps
 }) => (
   <Flex
-    className="pagination-container"
     aria-label="pagination navigation"
     as="nav"
+    className="pagination-container"
     {...flexProps}
   >
     {children}

@@ -96,6 +96,7 @@ export const PaginationSeparator: FC<SeparatorProps & ButtonProps> = ({
       if (!isDisabled) {
         onClick?.(event)
       }
+
       handleJumpClick()
     },
   })
@@ -108,10 +109,12 @@ export const PaginationSeparator: FC<SeparatorProps & ButtonProps> = ({
     () => !canJump || (isDisabledProp ?? isDisabledGlobal),
     [canJump, isDisabledProp, isDisabledGlobal],
   )
+
   const jumpingDirectionLabel = useMemo(
     () => (separatorPosition === "left" ? "backwards" : "forward"),
     [separatorPosition],
   )
+
   const allProps = useMemo(
     () => ({
       ...separatorStyles,

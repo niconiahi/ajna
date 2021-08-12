@@ -38,11 +38,9 @@ const Full: FC = () => {
     undefined,
   )
   const [pokemons, setPokemons] = useState<Pokemon[]>([])
-
   // constants
   const outerLimit = 2
   const innerLimit = 2
-
   const {
     pages,
     pagesCount,
@@ -81,7 +79,6 @@ const Full: FC = () => {
     setCurrentPage(nextPage)
     console.log("request new data with ->", nextPage)
   }
-
   const handlePageSizeChange = (
     event: ChangeEvent<HTMLSelectElement>,
   ): void => {
@@ -89,7 +86,6 @@ const Full: FC = () => {
 
     setPageSize(pageSize)
   }
-
   const handleDisableClick = (): void => {
     setIsDisabled((oldState) => !oldState)
   }
@@ -97,9 +93,9 @@ const Full: FC = () => {
   return (
     <Stack>
       <Pagination
-        pagesCount={pagesCount}
         currentPage={currentPage}
         isDisabled={isDisabled}
+        pagesCount={pagesCount}
         onPageChange={handlePageChange}
       >
         <PaginationContainer
@@ -109,11 +105,11 @@ const Full: FC = () => {
           w="full"
         >
           <PaginationPrevious
+            isDisabled
             _hover={{
               bg: "yellow.400",
             }}
             bg="yellow.300"
-            isDisabled
             onClick={() => console.warn("I'm clicking the previous")}
           >
             <Text>Previous</Text>
@@ -124,30 +120,30 @@ const Full: FC = () => {
             separator={
               <PaginationSeparator
                 isDisabled
-                onClick={() => console.warn("I'm clicking the separator")}
                 bg="blue.300"
                 fontSize="sm"
-                w={7}
                 jumpSize={11}
+                w={7}
+                onClick={() => console.warn("I'm clicking the separator")}
               />
             }
           >
             {pages.map((page: number) => (
               <PaginationPage
-                w={7}
-                bg="red.300"
                 key={`pagination_page_${page}`}
-                page={page}
-                onClick={() => console.warn("Im clicking the page")}
-                fontSize="sm"
-                _hover={{
-                  bg: "green.300",
-                }}
                 _current={{
                   bg: "green.300",
                   fontSize: "sm",
                   w: 7,
                 }}
+                _hover={{
+                  bg: "green.300",
+                }}
+                bg="red.300"
+                fontSize="sm"
+                page={page}
+                w={7}
+                onClick={() => console.warn("Im clicking the page")}
               />
             ))}
           </PaginationPageGroup>
@@ -172,7 +168,7 @@ const Full: FC = () => {
         >
           Disable ON / OFF
         </Button>
-        <Select ml={3} onChange={handlePageSizeChange} w={40}>
+        <Select ml={3} w={40} onChange={handlePageSizeChange}>
           <option value="10">10</option>
           <option value="25">25</option>
           <option value="50">50</option>
