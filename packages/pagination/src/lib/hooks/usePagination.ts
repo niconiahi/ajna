@@ -88,6 +88,7 @@ export const usePagination = ({
         "Ajna pagination -> passed down inner limit has to be a whole number",
       )
     }
+
     if (outerLimit != null && isDecimalNumber(outerLimit)) {
       console.error(
         "Ajna pagination -> passed down outerLimit limit has to be a whole number",

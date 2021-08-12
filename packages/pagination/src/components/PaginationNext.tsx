@@ -45,6 +45,7 @@ export const PaginationNext: FC<ButtonProps> = ({
       if (!isDisabled) {
         onClick?.(event)
       }
+
       handleNextClick()
     },
   })

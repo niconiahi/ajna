@@ -4,7 +4,7 @@
   "plugins": [
     "@typescript-eslint"
   ],
-   "parserOptions": {
+  "parserOptions": {
     "ecmaVersion": 10,
     "ecmaFeatures": {
       "jsx": true
@@ -12,7 +12,7 @@
   },
   "extends": [
     "plugin:@typescript-eslint/recommended",
-    "plugin:import/errors", 
+    "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
     "plugin:jsx-a11y/recommended",
@@ -33,19 +33,57 @@
   },
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
       "parserOptions": {
-        "project": ["tsconfig.json"]
+        "project": [
+          "tsconfig.json"
+        ]
       }
     }
   ],
   "rules": {
-    // off
+    // react
     "react/prop-types": "off",
-    // error
     "react/sort-prop-types": "error",
+    "react/self-closing-comp": "error",
+    "react/jsx-boolean-value": "error",
+    "react/jsx-handler-names": "error",
+    "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/explicit-module-boundary-types": "error"
+    "react/no-find-dom-node": "error",
+    "react/jsx-pascal-case": ["error", {"allowAllCaps": false, "allowNamespace": false}],
+    "react/jsx-fragments": ["error", "syntax"],
+    "react/jsx-curly-brace-presence": ["error", {
+      "props": "never",
+      "children": "never"
+    }],
+    "react/jsx-sort-props": ["error", {
+      "callbacksLast": true,
+      "shorthandFirst": true,
+      "noSortAlphabetically": false,
+      "reservedFirst": true
+    }],
+    // typescript
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "error",
+    // eslint
+    "camelcase": "error",
+    "no-unreachable": "error",
+    "no-useless-computed-key": "error",
+    "newline-before-return": "error",
+    "use-isnan": "error",
+    "eqeqeq": ["error", "always", {"null": "ignore"}],
+    "one-var": ["error", { "initialized": "never" }],
+    "padding-line-between-statements": [
+        "error",
+        // { "blankLine": LINEBREAK_TYPE, "prev": STATEMENT_TYPE, "next": STATEMENT_TYPE },
+        { "blankLine": "always", "prev": "*", "next": "return"},
+        { "blankLine": "always", "prev": "multiline-block-like", "next": "if"},
+        { "blankLine": "always", "prev": "multiline-block-like", "next": "expression"}
+    ]
   }
 }

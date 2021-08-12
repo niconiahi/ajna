@@ -50,6 +50,7 @@ export const PaginationPage: FC<PageProps & ButtonProps> = ({
       if (!isDisabled) {
         onClick?.(event)
       }
+
       changePage(page)
     },
   })
