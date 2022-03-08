@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.14](https://github.com/niconiahi/ajna/compare/@ajna/pagination@1.4.13...@ajna/pagination@1.4.14) (2022-03-08)
+
+**Note:** Version bump only for package @ajna/pagination
+
+
+
+
+
 ## [1.4.13](https://github.com/niconiahi/ajna/compare/@ajna/pagination@1.4.12...@ajna/pagination@1.4.13) (2021-08-09)
 
 **Note:** Version bump only for package @ajna/pagination
