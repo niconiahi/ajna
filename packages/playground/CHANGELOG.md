@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/niconiahi/ajna/compare/@ajna/playground@1.5.1...@ajna/playground@1.5.2) (2022-04-01)
+
+**Note:** Version bump only for package @ajna/playground
+
+
+
+
+
 ## [1.5.1](https://github.com/niconiahi/ajna/compare/@ajna/playground@1.5.0...@ajna/playground@1.5.1) (2022-04-01)
 
 
