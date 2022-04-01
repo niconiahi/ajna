@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/niconiahi/ajna/compare/@ajna/playground@1.5.0...@ajna/playground@1.5.1) (2022-04-01)
+
+
+### Bug Fixes
+
+* remove failing eslint imports ([8be971a](https://github.com/niconiahi/ajna/commit/8be971a93482a663a765afe42a0a6645c6d9674b))
+
+
+
+
+
 # 1.5.0 (2022-03-08)
 
 

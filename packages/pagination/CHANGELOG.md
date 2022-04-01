@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.15](https://github.com/niconiahi/ajna/compare/@ajna/pagination@1.4.14...@ajna/pagination@1.4.15) (2022-04-01)
+
+
+### Bug Fixes
+
+* remove failing eslint imports ([8be971a](https://github.com/niconiahi/ajna/commit/8be971a93482a663a765afe42a0a6645c6d9674b))
+
+
+
+
+
 ## [1.4.14](https://github.com/niconiahi/ajna/compare/@ajna/pagination@1.4.13...@ajna/pagination@1.4.14) (2022-03-08)
 
 **Note:** Version bump only for package @ajna/pagination
