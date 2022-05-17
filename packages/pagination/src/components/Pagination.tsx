@@ -9,6 +9,7 @@ export type PaginationProps = {
   currentPage: number
   pagesCount: number
   isDisabled?: boolean
+  children?: React.ReactNode
 }
 
 export const Pagination: FC<PaginationProps> = ({
