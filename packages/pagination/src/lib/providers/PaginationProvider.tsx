@@ -38,6 +38,7 @@ export const PaginationContext = createContext<PaginationContextValues>({
 })
 
 export type PaginationProviderProps = {
+  children?: React.ReactElement
   isDisabled: boolean
   pagesCount: number
   currentPage: number

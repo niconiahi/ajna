@@ -5,19 +5,19 @@ import { PaginationProvider } from "../lib/providers/PaginationProvider"
 import { INITIAL_VALUES } from "../lib/constants"
 
 export type PaginationProps = {
-  onPageChange: (page: number) => void
-  currentPage: number
+  children?: React.ReactElement
   pagesCount: number
   isDisabled?: boolean
-  children?: React.ReactNode
+  currentPage: number
+  onPageChange: (page: number) => void
 }
 
 export const Pagination: FC<PaginationProps> = ({
   children,
   pagesCount,
-  onPageChange,
   isDisabled = INITIAL_VALUES.isDisabled,
   currentPage = INITIAL_VALUES.currentPage,
+  onPageChange,
 }) => (
   <PaginationProvider
     currentPage={currentPage}
